@@ -10,6 +10,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public event Action<Vector2> OnMoveChanged;
     public event Action<bool> OnDriftChanged;
+    public event Action OnShiftPressed;
 
     private Controls _controls;
 
@@ -35,5 +36,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         IsDrifting = context.phase == InputActionPhase.Performed;
         OnDriftChanged?.Invoke(IsDrifting);
+    }
+
+    public void OnShift(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnShiftPressed?.Invoke();
     }
 }

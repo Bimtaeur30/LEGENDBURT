@@ -1,7 +1,16 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using Unity.Collections;
+using UnityEngine;
 
 public class Movement : MonoBehaviour, IModule
 {
+    [Header("TEST")]
+    [SerializeField] private TextMeshProUGUI speedTxt;
+    [SerializeField] private ParticleSystem speedEffect;
+    [SerializeField] private TrailRenderer[] driftTrail;
+    [SerializeField, ReadOnly] private float speed;
+    [SerializeField, ReadOnly] private float signedSpeed;
+
     [Header("Wheels - Colliders")]
     [SerializeField] private WheelCollider wheelFL;
     [SerializeField] private WheelCollider wheelFR;
@@ -23,14 +32,17 @@ public class Movement : MonoBehaviour, IModule
     [Header("Drift")]
     [SerializeField] private float driftStiffness = 0.4f;
     [SerializeField] private float normalStiffness = 1.8f;
-    [SerializeField] private float driftDrag = 0.8f;          // 낮게 → 속도 잘 안 죽음
-    [SerializeField] private float driftSteerAngle = 15f;     // 드리프트 중 조향 제한
+    [SerializeField] private float driftDrag = 0.8f;
+    [SerializeField] private float driftSteerAngle = 15f;
 
     [Header("Downforce")]
     [SerializeField] private float downforce = 100f;
 
     private Player player;
     private float smoothedSteer;
+
+    public float Speed => speed;
+    public float SignedSpeed => signedSpeed;
 
     public void Initialize(ModuleOwner owner)
     {
@@ -47,13 +59,36 @@ public class Movement : MonoBehaviour, IModule
         ApplyDrift();
         ApplyDownforce();
         UpdateWheelMeshes();
+
+        speed = player.Rigid.linearVelocity.magnitude;
+        signedSpeed = Vector3.Dot(player.Rigid.linearVelocity, transform.forward);
+
+        if (signedSpeed > 12f)
+        {
+            if (!speedEffect.isPlaying)
+            {
+                speedEffect.Play();
+            }
+
+            var emission = speedEffect.emission;
+            emission.rateOverTime = (int)speed * 6;
+        }
+        else
+        {
+            if (speedEffect.isPlaying)
+            {
+                speedEffect.Stop();
+            }
+        }
+        speedTxt.text = "SPEED: " + (int)speed;
     }
 
     // ── Steering ─────────────────────────────────────────────
+
     private void ApplySteering()
     {
         float targetAngle = player.IsDrifting
-            ? player.MoveDir.x * driftSteerAngle   // 드리프트 중 조향 좁힘
+            ? player.MoveDir.x * driftSteerAngle
             : player.MoveDir.x * maxSteerAngle;
 
         smoothedSteer = Mathf.Lerp(smoothedSteer, targetAngle,
@@ -64,10 +99,11 @@ public class Movement : MonoBehaviour, IModule
     }
 
     // ── Motor / Reverse ───────────────────────────────────────
+
     private void ApplyMotor()
     {
         float input = player.MoveDir.y;
-        bool isMovingForward = Vector3.Dot(player.Rigid.linearVelocity, transform.forward) > 0.5f;
+        bool isMovingForward = SignedSpeed > 0.5f;
 
         // 전진 중 후진 입력 → 토크 안 줌 (브레이크가 담당)
         if (isMovingForward && input < 0f)
@@ -84,9 +120,8 @@ public class Movement : MonoBehaviour, IModule
     private void ApplyBrake()
     {
         float input = player.MoveDir.y;
-        bool isMovingForward = Vector3.Dot(player.Rigid.linearVelocity, transform.forward) > 0.5f;
+        bool isMovingForward = SignedSpeed > 0.5f;
 
-        // 전진 중 후진 입력 → 풀 브레이크
         float brake = (isMovingForward && input < 0f)
             ? brakeTorque
             : Mathf.Abs(input) < 0.05f ? brakeTorque * 0.3f : 0f;
@@ -98,6 +133,7 @@ public class Movement : MonoBehaviour, IModule
     }
 
     // ── Drift ─────────────────────────────────────────────────
+
     private void ApplyDrift()
     {
         float targetStiffness = player.IsDrifting ? driftStiffness : normalStiffness;
@@ -108,9 +144,16 @@ public class Movement : MonoBehaviour, IModule
             Vector3 vel = player.Rigid.linearVelocity;
             Vector3 horizontalVel = new Vector3(vel.x, 0f, vel.z);
 
-            // 속도가 어느정도 있을 때만 감속 (너무 느리면 감속 안 함)
             if (horizontalVel.magnitude > 3f)
                 player.Rigid.AddForce(-horizontalVel * driftDrag, ForceMode.Acceleration);
+
+            foreach (TrailRenderer t in driftTrail)
+                t.emitting = true;
+        }
+        else
+        {
+            foreach (TrailRenderer t in driftTrail)
+                t.emitting = false;
         }
     }
 
@@ -123,21 +166,22 @@ public class Movement : MonoBehaviour, IModule
     }
 
     // ── Downforce (고속 안정성) ───────────────────────────────
+
     private void ApplyDownforce()
     {
-        float speed = player.Rigid.linearVelocity.magnitude;
-        player.Rigid.AddForce(-transform.up * downforce * speed);
+        player.Rigid.AddForce(-transform.up * downforce);
 
         // 횡방향 속도만 감쇠 (전진 속도는 건드리지 않음)
-        if (!player.IsDrifting)
-        {
-            Vector3 localVel = transform.InverseTransformDirection(player.Rigid.linearVelocity);
-            localVel.x *= 0.85f; // 횡방향만 감쇠
-            player.Rigid.linearVelocity = transform.TransformDirection(localVel);
-        }
+        //if (!player.IsDrifting)
+        //{
+        //    Vector3 localVel = transform.InverseTransformDirection(player.Rigid.linearVelocity);
+        //    localVel.x *= 0.85f; // 횡방향만 감쇠
+        //    player.Rigid.linearVelocity = transform.TransformDirection(localVel);
+        //}
     }
 
     // ── Wheel Mesh Sync ───────────────────────────────────────
+
     private void UpdateWheelMeshes()
     {
         SyncMesh(wheelFL, meshFL);

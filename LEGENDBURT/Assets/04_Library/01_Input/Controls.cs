@@ -109,6 +109,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""90b69a14-a6d7-420f-af2a-856dd524a459"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -177,6 +186,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Drift"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""52daf284-9271-4353-b9bc-fd60234a3367"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -187,6 +207,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Drift = m_Player.FindAction("Drift", throwIfNotFound: true);
+        m_Player_Shift = m_Player.FindAction("Shift", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -269,6 +290,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Drift;
+    private readonly InputAction m_Player_Shift;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -288,6 +310,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Drift".
         /// </summary>
         public InputAction @Drift => m_Wrapper.m_Player_Drift;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Shift".
+        /// </summary>
+        public InputAction @Shift => m_Wrapper.m_Player_Shift;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -320,6 +346,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Drift.started += instance.OnDrift;
             @Drift.performed += instance.OnDrift;
             @Drift.canceled += instance.OnDrift;
+            @Shift.started += instance.OnShift;
+            @Shift.performed += instance.OnShift;
+            @Shift.canceled += instance.OnShift;
         }
 
         /// <summary>
@@ -337,6 +366,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Drift.started -= instance.OnDrift;
             @Drift.performed -= instance.OnDrift;
             @Drift.canceled -= instance.OnDrift;
+            @Shift.started -= instance.OnShift;
+            @Shift.performed -= instance.OnShift;
+            @Shift.canceled -= instance.OnShift;
         }
 
         /// <summary>
@@ -391,5 +423,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDrift(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shift" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShift(InputAction.CallbackContext context);
     }
 }
