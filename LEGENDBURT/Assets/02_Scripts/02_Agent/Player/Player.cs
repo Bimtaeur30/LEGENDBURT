@@ -15,14 +15,14 @@ public class Player : ModuleOwner
         base.InitializeComponents();
         InputSO.OnMoveChanged += HandleMoveChanged;
         InputSO.OnDriftChanged += HandleDriftChanged;
-        InputSO.OnShiftPressed += HandleShiftPressed;
+        InputSO.OnBoostPressed += HandleBoostPressed;
         BoostEffectModule = GetModule<BoostModule>();
         Rigid = GetComponent<Rigidbody>();
     }
 
-    private void HandleShiftPressed()
+    private void HandleBoostPressed()
     {
-        BoostEffectModule.Activate();
+        //BoostEffectModule.Activate();
     }
 
     private void HandleMoveChanged(Vector2 vector)
