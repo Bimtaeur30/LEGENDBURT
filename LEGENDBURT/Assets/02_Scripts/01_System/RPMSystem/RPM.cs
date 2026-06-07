@@ -5,10 +5,6 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using TMPro;
 using DG.Tweening;
-using UnityEngine.Splines.ExtrusionShapes;
-
-
-
 
 #if UNITY_EDITOR
 using UnityEditor;

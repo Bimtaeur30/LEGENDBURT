@@ -8,7 +8,7 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
 {
     [SerializeField] private EventChannelSO PlayerChannel;
 
-    [SerializeField] private float boostForce = 8000f;
+    [SerializeField] private float boostForce = 200f;
     [SerializeField] private ParticleSystem burtParticle;
     [SerializeField] private GameObject HipModel;
 
@@ -28,17 +28,22 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
 
     private void HandleActiveBurtEvent(ActiveBurtEvent @event)
     {
-        Activate();
+        Activate_Burt();
     }
 
-    public void Activate()
+    public void Activate_Burt()
     {
-        player.Rigid.AddForce(transform.forward * boostForce, ForceMode.Acceleration);
+        Active_Boost(boostForce);
         impulseSource.GenerateImpulse();
+
         burtParticle.Play();
         HipModel.transform.DOScale(1.2f, 0.2f).OnComplete(() => {
             HipModel.transform.DOScale(1f, 0.1f);
         });
     }
 
+    public void Active_Boost(float force)
+    {
+        player.Rigid.AddForce(transform.forward * force, ForceMode.Acceleration);
+    }
 }

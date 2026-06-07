@@ -12,6 +12,9 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public event Action<bool> OnDriftChanged;
     public event Action OnBoostPressed;
 
+    public event Action OnPartsActivePressed_01;
+    public event Action OnPartsActivePressed_02;
+
     private Controls _controls;
 
     private void OnEnable()
@@ -42,5 +45,17 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         if (context.performed)
             OnBoostPressed?.Invoke();
+    }
+
+    public void OnPartsActive_01(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnPartsActivePressed_01?.Invoke();
+    }
+
+    public void OnPartsActive_02(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnPartsActivePressed_02?.Invoke();
     }
 }

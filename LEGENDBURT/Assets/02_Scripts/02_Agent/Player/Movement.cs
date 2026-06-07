@@ -78,7 +78,7 @@ public class Movement : MonoBehaviour, IModule
             if (speedEffect.isPlaying)
                 speedEffect.Stop();
         }
-        speedTxt.text = "SPEED: " + (int)speed;
+        speedTxt.text = ((int)speed).ToString();
     }
 
     // ── Steering ─────────────────────────────────────────────

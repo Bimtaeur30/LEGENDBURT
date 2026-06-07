@@ -10,7 +10,7 @@ public class BoostItem : MonoBehaviour
     {
         if (!other.TryGetComponent<Player>(out var player)) return;
 
-        player.BoostEffectModule.Activate();
+        player.GetModule<BoostModule>().Activate_Burt();
         StartCoroutine(Respawn());
     }
 

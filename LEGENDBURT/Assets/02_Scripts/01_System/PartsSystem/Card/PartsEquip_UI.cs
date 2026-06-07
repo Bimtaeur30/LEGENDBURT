@@ -1,0 +1,56 @@
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+public class PartsEquip_UI : MonoBehaviour
+{
+    // 카드 생성하고 지우는거 안했음.
+    // ParsCardSelector_UI에서 이쪽으로 ActivateEquipParts 해줘야함.
+    [Header("Events")]
+    [SerializeField] private EventChannelSO playerChannel;
+    [Header("UI")]
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup equipBtnGroup;
+    [SerializeField] private Image partsIcon;
+    [SerializeField] private Button equipBtn_L;
+    [SerializeField] private Button equipBtn_R;
+    private bool onEquipEvent = false;
+    private PartsDataSO myData;
+
+    private void Awake()
+    {
+        equipBtn_L.onClick.AddListener(() => HandleEquipBtnPressed(PartsJointPos.FirstSlot));
+        equipBtn_R.onClick.AddListener(() => HandleEquipBtnPressed(PartsJointPos.SecondSlot));
+    }
+
+    private void HandleEquipBtnPressed(PartsJointPos pos)
+    {
+        // 이제 여기서 부착해주면 된다.
+        playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(myData.PartPrefab, pos));
+    }
+
+    public void ActivateEquipParts(PartsDataSO data)
+    {
+        myData = data;
+        onEquipEvent = true;
+        partsIcon.sprite = data.PartsIcon;
+
+        canvasGroup.DOFade(1f, 1f);
+        equipBtnGroup.DOFade(1f, 1f);
+    }
+
+    public void DeactivateEquipParts()
+    {
+        canvasGroup.DOFade(0f, 1f);
+        equipBtnGroup.DOFade(0f, 1f);
+    }
+
+    private void Update()
+    {
+        if (onEquipEvent)
+        {
+            partsIcon.rectTransform.position = Mouse.current.position.ReadValue();
+        }
+    }
+}

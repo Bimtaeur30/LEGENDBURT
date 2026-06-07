@@ -118,6 +118,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PartsActive_01"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c120415-ef8c-4653-8dfb-839e90c4b431"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PartsActive_02"",
+                    ""type"": ""Button"",
+                    ""id"": ""944150a2-9ad1-47cc-86c0-d03e98b003c9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -197,6 +215,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd91e3b3-f125-49e3-ae69-f86f8a7a061d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PartsActive_01"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be4d4baf-cd2c-43ef-956a-daf534ace4b8"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PartsActive_02"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +248,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Drift = m_Player.FindAction("Drift", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
+        m_Player_PartsActive_01 = m_Player.FindAction("PartsActive_01", throwIfNotFound: true);
+        m_Player_PartsActive_02 = m_Player.FindAction("PartsActive_02", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -291,6 +333,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Drift;
     private readonly InputAction m_Player_Boost;
+    private readonly InputAction m_Player_PartsActive_01;
+    private readonly InputAction m_Player_PartsActive_02;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -314,6 +358,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Boost".
         /// </summary>
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PartsActive_01".
+        /// </summary>
+        public InputAction @PartsActive_01 => m_Wrapper.m_Player_PartsActive_01;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PartsActive_02".
+        /// </summary>
+        public InputAction @PartsActive_02 => m_Wrapper.m_Player_PartsActive_02;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -349,6 +401,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Boost.started += instance.OnBoost;
             @Boost.performed += instance.OnBoost;
             @Boost.canceled += instance.OnBoost;
+            @PartsActive_01.started += instance.OnPartsActive_01;
+            @PartsActive_01.performed += instance.OnPartsActive_01;
+            @PartsActive_01.canceled += instance.OnPartsActive_01;
+            @PartsActive_02.started += instance.OnPartsActive_02;
+            @PartsActive_02.performed += instance.OnPartsActive_02;
+            @PartsActive_02.canceled += instance.OnPartsActive_02;
         }
 
         /// <summary>
@@ -369,6 +427,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Boost.started -= instance.OnBoost;
             @Boost.performed -= instance.OnBoost;
             @Boost.canceled -= instance.OnBoost;
+            @PartsActive_01.started -= instance.OnPartsActive_01;
+            @PartsActive_01.performed -= instance.OnPartsActive_01;
+            @PartsActive_01.canceled -= instance.OnPartsActive_01;
+            @PartsActive_02.started -= instance.OnPartsActive_02;
+            @PartsActive_02.performed -= instance.OnPartsActive_02;
+            @PartsActive_02.canceled -= instance.OnPartsActive_02;
         }
 
         /// <summary>
@@ -430,5 +494,19 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnBoost(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PartsActive_01" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPartsActive_01(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PartsActive_02" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPartsActive_02(InputAction.CallbackContext context);
     }
 }
