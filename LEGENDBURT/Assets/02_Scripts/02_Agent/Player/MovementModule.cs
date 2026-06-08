@@ -135,7 +135,8 @@ public class MovementModule : MonoBehaviour, IModule
     private void ApplyDrift()
     {
         float targetStiffness = player.IsDrifting ? driftStiffness : normalStiffness;
-        currentStiffness = Mathf.Lerp(currentStiffness, targetStiffness, Time.fixedDeltaTime * 5f);
+        float lerpSpeed = player.IsDrifting ? 5f : 20f;
+        currentStiffness = Mathf.Lerp(currentStiffness, targetStiffness, Time.fixedDeltaTime * lerpSpeed);
         SetRearSideStiffness(currentStiffness);
 
         if (player.IsDrifting)
@@ -160,9 +161,9 @@ public class MovementModule : MonoBehaviour, IModule
         }
         else
         {
-            // 드리프트 종료 시 남은 횡방향 속도 부드럽게 감쇠
+            // 드리프트 종료 시 횡속도 강하게 즉시 제거
             float lateralSpeed = Vector3.Dot(player.Rigid.linearVelocity, transform.right);
-            player.Rigid.AddForce(-transform.right * lateralSpeed * 3f, ForceMode.Acceleration);
+            player.Rigid.AddForce(-transform.right * lateralSpeed * 10f, ForceMode.Acceleration);
 
             foreach (TrailRenderer t in driftTrail)
                 t.emitting = false;
