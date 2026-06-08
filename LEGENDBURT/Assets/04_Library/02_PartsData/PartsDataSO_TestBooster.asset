@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PartsDataSO_TestBooster
   m_EditorClassIdentifier: Assembly-CSharp::BoosterPartsDataSO
   PartsIcon: {fileID: 21300000, guid: 88f470276c7deae4a8ffd0dfb2942876, type: 3}
-  PartsName: "\uC5F0\uAE30"
-  PartsDescription: "\uC5C4\uB9C8 \uB098 \uB625\uAF2C\uC5D0\uC11C \uC5F0\uAE30\uAC00
-    \uB098\uC640!"
+  PartsName: "\uAC80\uC740\uC5F0\uAE30"
+  PartsDescription: "\uBC29\uADC0\uAC00 \uC369\uC5B4\uC11C \uAC80\uC740\uC5F0\uAE30\uAC00
+    \uB418\uC5B4\uBC84\uB838\uC2B5\uB2C8\uB2E4."
   PartPrefab: {fileID: 7683231801431176997, guid: 1c92b3b254611ab479a58cb7ac284cc9, type: 3}
+  CoolTime: 10
   BoostParticlePrefab: {fileID: 5347942632590983087, guid: 2566c80363bdb8e4d9a06f12c6459da5, type: 3}
   BoostForce: 50

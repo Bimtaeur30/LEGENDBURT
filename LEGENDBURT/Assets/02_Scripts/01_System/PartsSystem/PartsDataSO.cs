@@ -7,4 +7,5 @@ public class PartsDataSO : ScriptableObject
     [TextArea]
     public string PartsDescription;
     public PartBase PartPrefab;
+    public float CoolTime;
 }

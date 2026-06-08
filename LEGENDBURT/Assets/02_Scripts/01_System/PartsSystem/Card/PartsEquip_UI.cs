@@ -10,6 +10,7 @@ public class PartsEquip_UI : MonoBehaviour
     [Header("Events")]
     [SerializeField] private EventChannelSO playerChannel;
     [Header("UI")]
+    [SerializeField] private CanvasGroup[] hideGroups;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private CanvasGroup equipBtnGroup;
     [SerializeField] private Image partsIcon;
@@ -27,6 +28,7 @@ public class PartsEquip_UI : MonoBehaviour
     private void HandleEquipBtnPressed(PartsJointPos pos)
     {
         // 이제 여기서 부착해주면 된다.
+        DeactivateEquipParts();
         playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(myData.PartPrefab, pos));
     }
 
@@ -38,12 +40,21 @@ public class PartsEquip_UI : MonoBehaviour
 
         canvasGroup.DOFade(1f, 1f);
         equipBtnGroup.DOFade(1f, 1f);
+        equipBtnGroup.interactable = true;
+
+        foreach (CanvasGroup c in hideGroups)
+            c.DOFade(0f, 0.5f);
     }
 
     public void DeactivateEquipParts()
     {
-        canvasGroup.DOFade(0f, 1f);
-        equipBtnGroup.DOFade(0f, 1f);
+        
+        canvasGroup.DOFade(0f, 0.5f);
+        equipBtnGroup.DOFade(0f, 0.5f);
+        equipBtnGroup.interactable = false;
+
+        foreach (CanvasGroup c in hideGroups)
+            c.DOFade(1f, 0.5f);
     }
 
     private void Update()

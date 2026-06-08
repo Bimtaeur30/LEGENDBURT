@@ -12,6 +12,7 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
     [SerializeField] private ParticleSystem burtParticle;
     [SerializeField] private GameObject HipModel;
 
+    public float BoostMultiplier = 1f;
     private CinemachineImpulseSource impulseSource;
     private Player player;
 
@@ -33,7 +34,12 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
 
     public void Activate_Burt()
     {
-        Active_Boost(boostForce);
+        ArtifactContext at = new ArtifactContext();
+        at.player = player;
+        at.SetModule(this);
+        ArtifactManager.Instance.Fire(TriggerType.OnBurtSuccess, at);
+
+        Active_Boost(boostForce * BoostMultiplier);
         impulseSource.GenerateImpulse();
 
         burtParticle.Play();

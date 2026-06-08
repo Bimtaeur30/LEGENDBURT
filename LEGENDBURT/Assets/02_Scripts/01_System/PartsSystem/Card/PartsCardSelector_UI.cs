@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PartsCardSelector_UI : MonoBehaviour
 {
+    [SerializeField] private PartsEquip_UI partsEquip_UI;
     [Header("Parts")]
     [SerializeField] private PartsDataSO[] randomPartsDataSO;
     [Header("Events")]
@@ -39,11 +40,19 @@ public class PartsCardSelector_UI : MonoBehaviour
         }
     }
 
+    private void RemoveCards()
+    {
+        for (int i = 0; i < cardParents.childCount; i++)
+            Destroy(cardParents.GetChild(i).gameObject);
+    }
+
     private void OnCardSelectEventEnd(PartsDataSO selectedPartsData)
     {
         cardSelectGroup.DOFade(0f, 1f);
         cardSelectGroup.blocksRaycasts = false;
+        RemoveCards();
 
-        playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(selectedPartsData.PartPrefab, PartsJointPos.FirstSlot));
+        partsEquip_UI.ActivateEquipParts(selectedPartsData);
+        //playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(selectedPartsData.PartPrefab, PartsJointPos.FirstSlot));
     }
 }

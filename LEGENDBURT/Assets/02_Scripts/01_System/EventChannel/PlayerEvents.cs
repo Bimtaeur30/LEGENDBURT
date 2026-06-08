@@ -8,6 +8,7 @@ public static class PlayerEvents
     public static readonly RemovePartsEvent RemovePartsEvent = new RemovePartsEvent();
     public static readonly ActivePartsEvent ActivePartsEvent = new ActivePartsEvent();
     public static readonly OnCardSelectEvent OnCardSelectEvent = new OnCardSelectEvent();
+    public static readonly EquipItemEvent EquipItemEvent = new EquipItemEvent();
 
 }
 
@@ -42,3 +43,12 @@ public class ActivePartsEvent : GameEvent
     }
 }
 public class OnCardSelectEvent : GameEvent { }
+public class EquipItemEvent : GameEvent
+{
+    public ArtifactSO artifactSO;
+    public EquipItemEvent Init(ArtifactSO artifactSO)
+    {
+        this.artifactSO = artifactSO;
+        return this;
+    }
+}

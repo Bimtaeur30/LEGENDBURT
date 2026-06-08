@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd38fda40d891ca48b2f5ef3b57722b7, type: 3}
+  m_Name: Artifact_RaiseMortorPower
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactSO
+  ArtifactName: "\uBC29\uADC0\uB0C4\uC0C8 \uB9E1\uC74C"
+  Icon: {fileID: 21300000, guid: a4d6c044f84dbc94bb8b075cf70e1722, type: 3}
+  Description: "\uBC14\uD034 \uD30C\uC6CC\uB97C 50% \uB354\uD574\uC90D\uB2C8\uB2E4."
+  Effects:
+  - {fileID: 11400000, guid: 8aeba4127f1235d4589bf45520fc9e04, type: 2}

@@ -2,11 +2,12 @@
 using Unity.Collections;
 using UnityEngine;
 
-public class Movement : MonoBehaviour, IModule
+public class MovementModule : MonoBehaviour, IModule
 {
     [Header("TEST")]
     [SerializeField] private TextMeshProUGUI speedTxt;
     [SerializeField] private ParticleSystem speedEffect;
+    [SerializeField] private ParticleSystem driftParticle;
     [SerializeField] private TrailRenderer[] driftTrail;
     [SerializeField, ReadOnly] private float speed;
     [SerializeField, ReadOnly] private float signedSpeed;
@@ -24,7 +25,7 @@ public class Movement : MonoBehaviour, IModule
     [SerializeField] private Transform meshRR;
 
     [Header("Engine")]
-    [SerializeField] private float motorTorque = 1500f;
+    [SerializeField] public float MotorTorque = 800f;
     [SerializeField] private float brakeTorque = 3000f;
     [SerializeField] private float maxSteerAngle = 30f;
     [SerializeField] private float steerSmoothTime = 0.12f;
@@ -110,8 +111,8 @@ public class Movement : MonoBehaviour, IModule
             return;
         }
 
-        wheelRL.motorTorque = input * motorTorque;
-        wheelRR.motorTorque = input * motorTorque;
+        wheelRL.motorTorque = input * MotorTorque;
+        wheelRR.motorTorque = input * MotorTorque;
     }
 
     private void ApplyBrake()
@@ -155,6 +156,7 @@ public class Movement : MonoBehaviour, IModule
 
             foreach (TrailRenderer t in driftTrail)
                 t.emitting = true;
+            driftParticle.Play();
         }
         else
         {
@@ -164,6 +166,7 @@ public class Movement : MonoBehaviour, IModule
 
             foreach (TrailRenderer t in driftTrail)
                 t.emitting = false;
+            driftParticle.Stop();
         }
     }
 

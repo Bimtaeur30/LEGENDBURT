@@ -5,8 +5,8 @@ public class Parts_TestBoost : PartBase
 {
     private ParticleSystem particle;
     private BoosterPartsDataSO boosterPartsDataSO;
-
     private BoostModule boostModule;
+    private bool isCoolTime = false;
 
     public override void Initialize(ModuleOwner owner)
     {
@@ -27,15 +27,28 @@ public class Parts_TestBoost : PartBase
 
     public override void Activate()
     {
+        if (isCoolTime) return;
         Debug.Log($"name = {gameObject.name}");
         Debug.Log($"activeSelf = {gameObject.activeSelf}");
         Debug.Log($"activeInHierarchy = {gameObject.activeInHierarchy}");
         Debug.Log($"enabled = {enabled}");
 
+        StartCoroutine(CoolTimeCoroutine(boosterPartsDataSO.CoolTime));
         StartCoroutine(BoostCoroutine());
         particle.Play();
     }
 
+
+    public override void Deactivate()
+    {
+        particle.Stop();
+    }
+
+    public override void DestroyParts()
+    {
+        particle.Stop();
+        Destroy(particle.gameObject);
+    }
     IEnumerator BoostCoroutine()
     {
         float duration = 3f; // 테스트 값
@@ -53,15 +66,17 @@ public class Parts_TestBoost : PartBase
         Deactivate();
     }
 
-    public override void Deactivate()
+    IEnumerator CoolTimeCoroutine(float coolTime)
     {
-        particle.Stop();
-    }
+        isCoolTime = true;
+        float curTime = 0f;
 
-    public override void DestroyParts()
-    {
-        particle.Stop();
-        Destroy(particle.gameObject);
-    }
+        while (coolTime > curTime)
+        {
+            curTime += Time.deltaTime;
+            yield return null;
+        }
 
+        isCoolTime = false;
+    }
 }

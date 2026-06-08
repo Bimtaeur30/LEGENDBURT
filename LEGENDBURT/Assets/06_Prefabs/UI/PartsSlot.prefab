@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
+  m_Color: {r: 1, g: 0.59486824, b: 0.17295581, a: 0.6313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1016,10 +1016,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5a56baf332107449d3096e6cc7d852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PartsSlot_UI
+  coolTimeSlider: {fileID: 6758647785251351912}
   SlotItemUI: {fileID: 5014669038941825422}
-  ActiveAnimationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4

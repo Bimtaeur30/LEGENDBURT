@@ -17,5 +17,6 @@ MonoBehaviour:
   PartsDescription: "\uBAA8\uB4E0 \uC18C\uB9AC\uB294 \uC74C\uC545\uC774 \uB420 \uC218
     \uC788\uB2E4.\n- \uC874 \uCF00\uC774\uC9C0(John Cage)"
   PartPrefab: {fileID: 7683231801431176997, guid: eaad28b872c6ad346ba226db524129bd, type: 3}
+  CoolTime: 10
   BoostParticlePrefab: {fileID: 1426295420218159843, guid: 918346acb2539a74da21f56b9bf57e6b, type: 3}
   BoostForce: 50
