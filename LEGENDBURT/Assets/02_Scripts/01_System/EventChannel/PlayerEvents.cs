@@ -3,6 +3,8 @@ using UnityEngine;
 
 public static class PlayerEvents
 {
+    public static readonly OnGameStartEvent OnGameStartEvent = new OnGameStartEvent();
+    public static readonly OnGameOverEvent OnGameOverEvent = new OnGameOverEvent();
     public static readonly ActiveBurtEvent ActiveBurtEvent = new ActiveBurtEvent();
     public static readonly AttachPartsEvent AttachPartsEvent = new AttachPartsEvent();
     public static readonly RemovePartsEvent RemovePartsEvent = new RemovePartsEvent();
@@ -12,6 +14,8 @@ public static class PlayerEvents
 
 }
 
+public class OnGameStartEvent : GameEvent { }
+public class OnGameOverEvent : GameEvent { }
 public class ActiveBurtEvent : GameEvent { }
 public class AttachPartsEvent : GameEvent
 {
