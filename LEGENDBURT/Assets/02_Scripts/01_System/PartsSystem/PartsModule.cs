@@ -9,7 +9,7 @@ public enum PartsJointPos
 
 public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
 {
-    [SerializeField] private EventChannelSO PlayerChannel;
+    [SerializeField] private EventChannelSO playerChannel;
     [SerializeField] private Transform PartsJoint_01;
     [SerializeField] private Transform PartsJoint_02;
 
@@ -22,9 +22,9 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
     }
     public void AfterInitalize()
     {
-        PlayerChannel.AddListener<AttachPartsEvent>(HandleAttachPartsEvent);
-        PlayerChannel.AddListener<RemovePartsEvent>(HandleRemovePartsEvent);
-        PlayerChannel.AddListener<ActivePartsEvent>(HandleActivePartsEvent);
+        playerChannel.AddListener<AttachPartsEvent>(HandleAttachPartsEvent);
+        playerChannel.AddListener<RemovePartsEvent>(HandleRemovePartsEvent);
+        playerChannel.AddListener<ActivePartsEvent>(HandleActivePartsEvent);
     }
 
     private void HandleActivePartsEvent(ActivePartsEvent @event)
@@ -71,6 +71,9 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
                 currentSecondParts = instance;
                 break;
         }
+
+        //playerChannel.RasiseEvent(PlayerEvents.OnGameStartEvent);
+        //playerChannel.RasiseEvent(PlayerEvents.SetActivePlayerMovementInputEvent.Init(true));
     }
     private Transform GetJointTransform(PartsJointPos jointPos)
     {

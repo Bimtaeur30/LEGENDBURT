@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b8066fa73a3921b4d92787bc4137ec58, type: 3}
   m_Name: Effect_RaiseMortorPower
   m_EditorClassIdentifier: Assembly-CSharp::StatBoostEffect
   trigger: 0
-  amount: 400
+  amount: 500

@@ -19,6 +19,8 @@ public class Player : ModuleOwner
 
     public Rigidbody Rigid { get; private set; }
     public bool IsDrifting { get; private set; }
+    private bool isMovementInputEnabled = true;
+
 
     protected override void InitializeComponents()
     {
@@ -32,6 +34,13 @@ public class Player : ModuleOwner
 
         Rigid = GetComponent<Rigidbody>();
         MovementModule = GetModule<MovementModule>();
+
+        PlayerChannel.AddListener<SetActivePlayerMovementInputEvent>(HandleSetActivePlayerMovementInputEvent);
+    }
+
+    private void HandleSetActivePlayerMovementInputEvent(SetActivePlayerMovementInputEvent @event)
+    {
+        ToggleMovementInput(@event.IsActive);
     }
 
 
@@ -72,11 +81,22 @@ public class Player : ModuleOwner
     }
     private void HandleMoveChanged(Vector2 vector)
     {
+        if (!isMovementInputEnabled) return;
         MoveDir = vector;
     }
 
     private void HandleDriftChanged(bool obj)
     {
+        if (!isMovementInputEnabled) return;
+        if (obj == true)
+            GameOverManager.Instance.DriftCount++;
         IsDrifting = obj;
+    }
+    private void ToggleMovementInput(bool active)
+    {
+        isMovementInputEnabled = active;
+        MoveDir = Vector3.zero;
+        IsDrifting = false;
+        //Rigid.linearVelocity = Vector3.zero;
     }
 }

@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class PoopModule : MonoBehaviour
+public class PoopModule : MonoBehaviour, IModule
 {
     [Header("Event")]
     [SerializeField] private EventChannelSO playerChannel;
     [Header("Source")]
     [SerializeField] private Transform hipModel;
     [SerializeField] private SphereFillController sfc;
+    [SerializeField] private ParticleSystem poopParticle;
     [Header("Settings")]
     [SerializeField] private float poopTime = 60;
     [SerializeField] private float shakeInterval = 0.02f;
@@ -16,6 +17,11 @@ public class PoopModule : MonoBehaviour
     private bool runningGame = false;
     private Vector3 _originPos;
     private float _timer;
+    private Player player;
+    public void Initialize(ModuleOwner owner)
+    {
+        player = owner as Player;
+    }
 
     private void Awake()
     {
@@ -33,6 +39,7 @@ public class PoopModule : MonoBehaviour
     }
     private void Update()
     {
+        if (GameOverManager.Instance.IsGameOver) return;
         if (!runningGame) return;
 
         curTime += Time.deltaTime;
@@ -40,7 +47,8 @@ public class PoopModule : MonoBehaviour
         if (curTime > poopTime)
         {
             Debug.Log("게임 종료");
-            playerChannel.RasiseEvent(PlayerEvents.OnGameOverEvent);
+            poopParticle.Play();
+            playerChannel.RasiseEvent(PlayerEvents.OnGameOverRequestEvent.Init(false));
         }
 
         if (sfc.FillValue > 50)

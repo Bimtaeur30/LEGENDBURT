@@ -27,6 +27,9 @@ public class PartsEquip_UI : MonoBehaviour
 
     private void HandleEquipBtnPressed(PartsJointPos pos)
     {
+        Debug.Log(playerChannel);
+        Debug.Log(myData);
+        Debug.Log(myData?.PartPrefab);
         // 捞力 咯扁辑 何馒秦林搁 等促.
         DeactivateEquipParts();
         playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(myData.PartPrefab, pos));
@@ -34,7 +37,10 @@ public class PartsEquip_UI : MonoBehaviour
 
     public void ActivateEquipParts(PartsDataSO data)
     {
+        Debug.Log("蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔");
         myData = data;
+        Debug.Assert(data != null, "圈费费费费费费费费费费费费费费费费费费费费费费费费");
+        Debug.Assert(data.PartPrefab != null, "圈费费费费费费费费费费费费费费费费费费费费费费费费222222222222");
         onEquipEvent = true;
         partsIcon.sprite = data.PartsIcon;
 

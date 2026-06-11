@@ -46,6 +46,8 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
         HipModel.transform.DOScale(1.2f, 0.2f).OnComplete(() => {
             HipModel.transform.DOScale(1f, 0.1f);
         });
+
+        GameOverManager.Instance.FartCount++;
     }
 
     public void Active_Boost(float force)

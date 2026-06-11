@@ -28,10 +28,14 @@ Material:
     - _Axis: 1
     - _AxisMax: 0.5
     - _AxisMin: -0.5
+    - _DashRatio: 0.5
+    - _DashScale: 17.7
     - _Direction: 1
     - _FillValue: 0.488
+    - _LineThickness: 0.0173
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _FillColor: {r: 1, g: 0, b: 0, a: 1}
+    - _LineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

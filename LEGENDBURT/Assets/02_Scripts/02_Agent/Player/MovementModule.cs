@@ -64,6 +64,10 @@ public class MovementModule : MonoBehaviour, IModule
         UpdateWheelMeshes();
 
         speed = player.Rigid.linearVelocity.magnitude;
+
+        if (GameOverManager.Instance.BestSpeed < speed)
+            GameOverManager.Instance.BestSpeed = (int)speed;
+
         signedSpeed = Vector3.Dot(player.Rigid.linearVelocity, transform.forward);
 
         if (signedSpeed > 12f)

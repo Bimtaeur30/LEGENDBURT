@@ -16,4 +16,4 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: a4d6c044f84dbc94bb8b075cf70e1722, type: 3}
   Description: "\uBC14\uD034 \uD30C\uC6CC\uB97C 50% \uB354\uD574\uC90D\uB2C8\uB2E4."
   Effects:
-  - {fileID: 11400000, guid: 8aeba4127f1235d4589bf45520fc9e04, type: 2}
+  - {fileID: 11400000, guid: f441ece830815764b830447a32ee7c91, type: 2}

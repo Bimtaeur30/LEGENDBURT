@@ -5,17 +5,46 @@ public static class PlayerEvents
 {
     public static readonly OnGameStartEvent OnGameStartEvent = new OnGameStartEvent();
     public static readonly OnGameOverEvent OnGameOverEvent = new OnGameOverEvent();
+    public static readonly OnGameOverRequestEvent OnGameOverRequestEvent = new OnGameOverRequestEvent();
+
     public static readonly ActiveBurtEvent ActiveBurtEvent = new ActiveBurtEvent();
     public static readonly AttachPartsEvent AttachPartsEvent = new AttachPartsEvent();
     public static readonly RemovePartsEvent RemovePartsEvent = new RemovePartsEvent();
     public static readonly ActivePartsEvent ActivePartsEvent = new ActivePartsEvent();
     public static readonly OnCardSelectEvent OnCardSelectEvent = new OnCardSelectEvent();
     public static readonly EquipItemEvent EquipItemEvent = new EquipItemEvent();
+    public static readonly SetActivePlayerMovementInputEvent SetActivePlayerMovementInputEvent = new SetActivePlayerMovementInputEvent();
 
 }
 
 public class OnGameStartEvent : GameEvent { }
-public class OnGameOverEvent : GameEvent { }
+public class OnGameOverEvent : GameEvent
+{
+    public bool IsGameSuccess { get; private set; } // 스테이지 성공/ 실패 여부
+    public OnGameOverEvent Init(bool isOver)
+    {
+        IsGameSuccess = isOver;
+        return this;
+    }
+}
+public class OnGameOverRequestEvent : GameEvent
+{
+    public bool IsGameSuccess { get; private set; } // 스테이지 성공/ 실패 여부
+    public OnGameOverRequestEvent Init(bool isOver)
+    {
+        IsGameSuccess = isOver;
+        return this;
+    }
+}
+public class SetActivePlayerMovementInputEvent : GameEvent
+{
+    public bool IsActive { get; private set; } // 스테이지 성공/ 실패 여부
+    public SetActivePlayerMovementInputEvent Init(bool isActive)
+    {
+        IsActive = isActive;
+        return this;
+    }
+}
 public class ActiveBurtEvent : GameEvent { }
 public class AttachPartsEvent : GameEvent
 {

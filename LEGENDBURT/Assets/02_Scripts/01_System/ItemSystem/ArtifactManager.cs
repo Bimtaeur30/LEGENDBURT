@@ -23,6 +23,7 @@ public class ArtifactManager : MonoSingleton<ArtifactManager>
     private void HandleEquipItemEvent(EquipItemEvent @event)
     {
         _equipped.Add(@event.artifactSO);
+        GameOverManager.Instance.EarnedItemCount++;
         Fire(TriggerType.OnEquip, new ArtifactContext { player = _playerStats });
     }
 
