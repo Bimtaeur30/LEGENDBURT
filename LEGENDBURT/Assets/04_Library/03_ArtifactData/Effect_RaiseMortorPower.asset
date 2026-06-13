@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Effect_RaiseMortorPower
   m_EditorClassIdentifier: Assembly-CSharp::StatBoostEffect
   trigger: 0
-  amount: 500
+  amountPercent: 30

@@ -1,20 +1,28 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class StartLight : MonoBehaviour
 {
     [SerializeField] private GameObject[] lights;
     [SerializeField] private EventChannelSO playerChannel;
+    [SerializeField] private TextMeshProUGUI chatTxt;
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
-        playerChannel.AddListener<AttachPartsEvent>(HandleAttachPartsEvent);
+        playerChannel.AddListener<OnGameReadyEvent>(HandleOnGameReadyEvent);
         foreach(var part in lights)
             part.SetActive(false);
     }
 
-    private void HandleAttachPartsEvent(AttachPartsEvent @event)
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<OnGameReadyEvent>(HandleOnGameReadyEvent);
+    }
+
+    private void HandleOnGameReadyEvent(OnGameReadyEvent @event)
     {
         StartCoroutine(Countdown());
     }
@@ -27,18 +35,26 @@ public class StartLight : MonoBehaviour
         {
             GameObject light = lights[i];
             light.SetActive(true);
+            chatTxt.text = (3 - i).ToString() + "...";
             yield return new WaitForSeconds(1f); // 1초마다 빛 하나씩 증가
         }
 
         foreach (var part in lights)
             part.SetActive(false);
 
+        chatTxt.text = "GO!!";
         OnCountdownEnd();
     }
 
     private void OnCountdownEnd()
     {
+        animator.SetTrigger("FLY");
         playerChannel.RasiseEvent(PlayerEvents.OnGameStartEvent);
         playerChannel.RasiseEvent(PlayerEvents.SetActivePlayerMovementInputEvent.Init(true));
+    }
+
+    public void SetActivaeFalseThis()
+    {
+        gameObject.SetActive(false);
     }
 }

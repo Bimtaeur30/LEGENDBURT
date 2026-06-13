@@ -15,7 +15,7 @@ public class FartPowerEffect : ArtifactEffectBase
         {
             if (Random.Range(0, 100) >= rate)
             {
-                fart.BoostMultiplier *= multiplier;
+                fart.BoostMultiplier = multiplier;
                 Debug.Log(rate + "확률을 뚫고 방구 부스트 활성");
             }
             else

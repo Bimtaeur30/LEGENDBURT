@@ -3,21 +3,26 @@ using UnityEngine;
 
 public static class PlayerEvents
 {
-    public static readonly OnGameStartEvent OnGameStartEvent = new OnGameStartEvent();
-    public static readonly OnGameOverEvent OnGameOverEvent = new OnGameOverEvent();
+    public static readonly OnGameStartEvent OnGameStartEvent = new OnGameStartEvent(); // 신호등 꺼질 시
+    public static readonly OnGameReadyEvent OnGameReadyEvent = new OnGameReadyEvent(); // 시작 파츠 부착 시
+    public static readonly OnGameOverEvent OnGameOverEvent = new OnGameOverEvent(); // 끝지점 통과 / 실패 시
     public static readonly OnGameOverRequestEvent OnGameOverRequestEvent = new OnGameOverRequestEvent();
 
     public static readonly ActiveBurtEvent ActiveBurtEvent = new ActiveBurtEvent();
+
     public static readonly AttachPartsEvent AttachPartsEvent = new AttachPartsEvent();
     public static readonly RemovePartsEvent RemovePartsEvent = new RemovePartsEvent();
     public static readonly ActivePartsEvent ActivePartsEvent = new ActivePartsEvent();
+
     public static readonly OnCardSelectEvent OnCardSelectEvent = new OnCardSelectEvent();
     public static readonly EquipItemEvent EquipItemEvent = new EquipItemEvent();
     public static readonly SetActivePlayerMovementInputEvent SetActivePlayerMovementInputEvent = new SetActivePlayerMovementInputEvent();
 
+    public static readonly OnItemSelectEvent OnItemSelectEvent = new OnItemSelectEvent();
 }
 
 public class OnGameStartEvent : GameEvent { }
+public class OnGameReadyEvent : GameEvent { }
 public class OnGameOverEvent : GameEvent
 {
     public bool IsGameSuccess { get; private set; } // 스테이지 성공/ 실패 여부
@@ -48,9 +53,9 @@ public class SetActivePlayerMovementInputEvent : GameEvent
 public class ActiveBurtEvent : GameEvent { }
 public class AttachPartsEvent : GameEvent
 {
-    public PartBase Parts;
+    public PartsDataSO Parts;
     public PartsJointPos JointPos;
-    public  AttachPartsEvent Init(PartBase parts, PartsJointPos jointPos)
+    public  AttachPartsEvent Init(PartsDataSO parts, PartsJointPos jointPos)
     {
         this.Parts = parts;
         this.JointPos = jointPos;
@@ -85,3 +90,5 @@ public class EquipItemEvent : GameEvent
         return this;
     }
 }
+public class OnItemSelectEvent : GameEvent { }
+

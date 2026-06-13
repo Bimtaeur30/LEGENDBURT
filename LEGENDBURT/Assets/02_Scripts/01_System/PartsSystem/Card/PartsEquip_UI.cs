@@ -1,4 +1,6 @@
 using DG.Tweening;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,11 +20,13 @@ public class PartsEquip_UI : MonoBehaviour
     [SerializeField] private Button equipBtn_R;
     private bool onEquipEvent = false;
     private PartsDataSO myData;
+    private DG.Tweening.Sequence sequence;
 
     private void Awake()
     {
         equipBtn_L.onClick.AddListener(() => HandleEquipBtnPressed(PartsJointPos.FirstSlot));
         equipBtn_R.onClick.AddListener(() => HandleEquipBtnPressed(PartsJointPos.SecondSlot));
+        sequence = DOTween.Sequence();
     }
 
     private void HandleEquipBtnPressed(PartsJointPos pos)
@@ -32,29 +36,27 @@ public class PartsEquip_UI : MonoBehaviour
         Debug.Log(myData?.PartPrefab);
         // 捞力 咯扁辑 何馒秦林搁 等促.
         DeactivateEquipParts();
-        playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(myData.PartPrefab, pos));
+        playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(myData, pos));
+        playerChannel.RasiseEvent(PlayerEvents.OnGameReadyEvent);
     }
 
     public void ActivateEquipParts(PartsDataSO data)
     {
-        Debug.Log("蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔蛔");
         myData = data;
-        Debug.Assert(data != null, "圈费费费费费费费费费费费费费费费费费费费费费费费费");
-        Debug.Assert(data.PartPrefab != null, "圈费费费费费费费费费费费费费费费费费费费费费费费费222222222222");
         onEquipEvent = true;
         partsIcon.sprite = data.PartsIcon;
 
-        canvasGroup.DOFade(1f, 1f);
-        equipBtnGroup.DOFade(1f, 1f);
+        sequence.Join(canvasGroup.DOFade(1f, 1f));
+        sequence.Join(equipBtnGroup.DOFade(1f, 1f));
         equipBtnGroup.interactable = true;
 
         foreach (CanvasGroup c in hideGroups)
-            c.DOFade(0f, 0.5f);
+            sequence.Join(c.DOFade(0f, 0.5f));
     }
 
     public void DeactivateEquipParts()
     {
-        
+        sequence.Kill();
         canvasGroup.DOFade(0f, 0.5f);
         equipBtnGroup.DOFade(0f, 0.5f);
         equipBtnGroup.interactable = false;

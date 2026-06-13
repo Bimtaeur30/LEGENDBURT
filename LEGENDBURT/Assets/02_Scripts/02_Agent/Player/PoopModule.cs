@@ -27,6 +27,10 @@ public class PoopModule : MonoBehaviour, IModule
     {
         playerChannel.AddListener<OnGameStartEvent>(HandleOnGameStartEvent);
     }
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<OnGameStartEvent>(HandleOnGameStartEvent);
+    }
 
     private void HandleOnGameStartEvent(OnGameStartEvent @event)
     {
@@ -36,6 +40,7 @@ public class PoopModule : MonoBehaviour, IModule
     private void Start()
     {
         _originPos = hipModel.transform.localPosition;
+        poopTime = StageManager.Instance.CurrentStageData.LimitedTime;
     }
     private void Update()
     {

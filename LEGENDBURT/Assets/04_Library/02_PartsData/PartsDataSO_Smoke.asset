@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e955c44e951dade4bb6fa3984659f8c1, type: 3}
+  m_Name: PartsDataSO_Smoke
+  m_EditorClassIdentifier: Assembly-CSharp::BoosterPartsDataSO
+  <PartsName>k__BackingField: "\uC5F0\uAE30\uBC29\uAD6C"
+  <PartsGrade>k__BackingField: 0
+  <PartsGradeData>k__BackingField: {fileID: 11400000, guid: beb439329a094df498cc20fd4e0e9082, type: 2}
+  <PartsIcon>k__BackingField: {fileID: 21300000, guid: 88f470276c7deae4a8ffd0dfb2942876, type: 3}
+  <PartPrefab>k__BackingField: {fileID: 7683231801431176997, guid: 1c92b3b254611ab479a58cb7ac284cc9, type: 3}
+  <CoolTime>k__BackingField: 10
+  <PartsDescription>k__BackingField: "\uD30C\uC6CC 50, \uBC29\uAD6C\uAC00 \uC369\uC5B4\uC11C
+    \uAC80\uC740\uC0C9\uC774 \uB418\uC5C8\uB098\uBCF4\uB2E4. \uC5ED\uACB9\uB2E4."
+  BoostParticlePrefab: {fileID: 5347942632590983087, guid: 2566c80363bdb8e4d9a06f12c6459da5, type: 3}
+  BoostForce: 50

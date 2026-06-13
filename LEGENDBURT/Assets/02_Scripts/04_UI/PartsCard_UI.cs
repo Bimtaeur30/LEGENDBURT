@@ -12,6 +12,10 @@ public class PartsCard_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Image partsImage;
     [SerializeField] private TextMeshProUGUI titleTxt;
     [SerializeField] private TextMeshProUGUI descriptionTxt;
+    [Header("UI-Grade")]
+    [SerializeField] private TextMeshProUGUI gradeTxt;
+    [SerializeField] private Image gradeDot;
+    [SerializeField] private Image gradeGradient;
     [Header("Setting")]
     [SerializeField] float OnPointerEnterScale = 1.1f;
     [SerializeField] float OnPointerExitScale = 1f;
@@ -26,7 +30,17 @@ public class PartsCard_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         titleTxt.text = data.PartsName;
         descriptionTxt.text = data.PartsDescription;
 
+        gradeTxt.text = data.PartsGradeData.GetName(data.PartsGrade);
+        gradeTxt.color = data.PartsGradeData.GetColor(data.PartsGrade);
+        gradeDot.color = data.PartsGradeData.GetColor(data.PartsGrade);
+        gradeGradient.color = data.PartsGradeData.GetColor(data.PartsGrade);
+
         button.onClick.AddListener(HandleButtonClick);
+    }
+
+    private void OnDestroy()
+    {
+        button.onClick.RemoveListener(HandleButtonClick);
     }
 
     private void HandleButtonClick()

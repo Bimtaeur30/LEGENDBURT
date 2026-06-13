@@ -27,6 +27,11 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
         PlayerChannel.AddListener<ActiveBurtEvent>(HandleActiveBurtEvent);
     }
 
+    private void OnDestroy()
+    {
+        PlayerChannel.RemoveListener<ActiveBurtEvent>(HandleActiveBurtEvent);
+    }
+
     private void HandleActiveBurtEvent(ActiveBurtEvent @event)
     {
         Activate_Burt();
@@ -41,6 +46,7 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
 
         Active_Boost(boostForce * BoostMultiplier);
         impulseSource.GenerateImpulse();
+        player.ChatModule.GenerateChat("뿡");
 
         burtParticle.Play();
         HipModel.transform.DOScale(1.2f, 0.2f).OnComplete(() => {

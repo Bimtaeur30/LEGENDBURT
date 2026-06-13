@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd38fda40d891ca48b2f5ef3b57722b7, type: 3}
+  m_Name: Artifact_AllForBurt
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactSO
+  ArtifactName: "\uB2EC\uB9AC\uAE30 \uBAB0\uBE75"
+  Icon: {fileID: 21300000, guid: 7943a1685af23ec4eb061e51048722c4, type: 3}
+  Description: "\uBC14\uD034 \uCD9C\uB825\uC744 50% \uC99D\uAC00\uC2DC\uD0A4\uB294
+    \uB300\uC2E0\n\uBC29\uADC0 \uD30C\uC6CC\uAC00 30% \uAC10\uC18C\uD569\uB2C8\uB2E4."
+  Effects:
+  - {fileID: 11400000, guid: 7972c81c5a4ec234aadc04247ecb3b79, type: 2}
+  - {fileID: 11400000, guid: 74a4d6d7839ae5a469a6b891334343af, type: 2}

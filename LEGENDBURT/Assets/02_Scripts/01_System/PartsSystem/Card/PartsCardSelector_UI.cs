@@ -20,6 +20,10 @@ public class PartsCardSelector_UI : MonoBehaviour
     {
         playerChannel.AddListener<OnCardSelectEvent>(HandleOnCardSelectEvent);
     }
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<OnCardSelectEvent>(HandleOnCardSelectEvent);
+    }
 
     private void HandleOnCardSelectEvent(OnCardSelectEvent @event)
     {

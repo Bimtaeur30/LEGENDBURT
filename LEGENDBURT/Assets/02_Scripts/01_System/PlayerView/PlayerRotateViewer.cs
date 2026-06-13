@@ -14,7 +14,10 @@ public class PlayerRotateViewer : MonoBehaviour
         cinemachineCamera.Priority = 0;
         playerChannel.AddListener<OnGameOverEvent>(HandleOnGameOverEvent);
     }
-
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<OnGameOverEvent>(HandleOnGameOverEvent);
+    }
     private void HandleOnGameOverEvent(OnGameOverEvent @event)
     {
         onGameEnd = true;

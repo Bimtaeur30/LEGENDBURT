@@ -14,6 +14,11 @@ public class ItemInventory_UI : MonoBehaviour
         playerChannel.AddListener<EquipItemEvent>(HandleEquipItemEvent);
     }
 
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<EquipItemEvent>(HandleEquipItemEvent);
+    }
+
     private void HandleEquipItemEvent(EquipItemEvent @event)
     {
         ItemSlot_UI itemSlot = Instantiate(itemSlotPrefab, itemSlotParent);

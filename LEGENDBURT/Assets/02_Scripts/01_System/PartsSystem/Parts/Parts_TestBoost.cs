@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class Parts_TestBoost : PartBase
 {
@@ -7,6 +9,7 @@ public class Parts_TestBoost : PartBase
     private BoosterPartsDataSO boosterPartsDataSO;
     private BoostModule boostModule;
     private bool isCoolTime = false;
+    private CinemachineImpulseSource source;
 
     public override void Initialize(ModuleOwner owner)
     {
@@ -17,6 +20,8 @@ public class Parts_TestBoost : PartBase
         Debug.Assert(boosterPartsDataSO != null, "부스트 파츠의 파츠 데이터SO는 BoosterPartsDataSO 형식이어야 합니다.");
         boostModule = owner.GetModule<BoostModule>();
         Debug.Assert(boostModule != null, "오너에 부스트 모듈이 부착되어있지 않습니다.");
+        source = GetComponent<CinemachineImpulseSource>();
+        Debug.Assert(source != null, "파츠에 시네머신 임펄스 소스 컴포넌트가 부착되어있지 않습니다.");
 
         // 파티클 세팅
         particle = Instantiate(boosterPartsDataSO.BoostParticlePrefab, player.transform);
@@ -36,6 +41,7 @@ public class Parts_TestBoost : PartBase
         StartCoroutine(CoolTimeCoroutine(boosterPartsDataSO.CoolTime));
         StartCoroutine(BoostCoroutine());
         particle.Play();
+        source.GenerateImpulse();
     }
 
 

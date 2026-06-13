@@ -15,6 +15,14 @@ public class PartsInventory_UI : MonoBehaviour
         PlayerChannel.AddListener<ActivePartsEvent>(HandleActivePartsEvent);
 
     }
+
+    private void OnDestroy()
+    {
+        PlayerChannel.RemoveListener<AttachPartsEvent>(HandleAttachPartsEvent);
+        PlayerChannel.RemoveListener<RemovePartsEvent>(HandleRemovePartsEvent);
+        PlayerChannel.RemoveListener<ActivePartsEvent>(HandleActivePartsEvent);
+    }
+
     private void HandleActivePartsEvent(ActivePartsEvent @event)
     {
         if (@event.JointPos == PartsJointPos.FirstSlot)
@@ -51,13 +59,13 @@ public class PartsInventory_UI : MonoBehaviour
             case PartsJointPos.FirstSlot:
                 // 이미지에 아이템 이미지 적용시키기.
                 SlotItemUI_01.enabled = true;
-                SlotItemUI_01.SetSlot(@event.Parts.PartsDataSO);
+                SlotItemUI_01.SetSlot(@event.Parts);
 
                 break;
             case PartsJointPos.SecondSlot:
                 // 이미지에 아이템 이미지 적용시키기.
                 SlotItemUI_02.enabled = true;
-                SlotItemUI_02.SetSlot(@event.Parts.PartsDataSO);
+                SlotItemUI_02.SetSlot(@event.Parts);
                 break;
         }
     }

@@ -208,6 +208,7 @@ public class RPM : MonoBehaviour
         else
         {
             Debug.Log($"실패! 현재 슬롯: {currentSlotIndex + 1} / 목표 슬롯: {targetIndex + 1}");
+            ArtifactManager.Instance.Fire(TriggerType.OnBurtFailure, null);
             currentCombo = 0;
         }
 

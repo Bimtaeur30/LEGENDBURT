@@ -10,7 +10,8 @@ public class ArtifactManager : MonoSingleton<ArtifactManager>
     [Header("Player")]
     [SerializeField] private Player _playerStats;
 
-    private readonly List<ArtifactSO> _equipped = new();
+    public List<ArtifactSO> Equipped { get; private set; } = new();
+    public List<ArtifactSO> SaveEquipped { get; private set; } = new();
     private readonly Dictionary<ArtifactEffectBase, float> _timers = new();
 
     // 式式 濰雜 / п薯 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
@@ -18,11 +19,27 @@ public class ArtifactManager : MonoSingleton<ArtifactManager>
     {
         base.Awake();
         playerChannel.AddListener<EquipItemEvent>(HandleEquipItemEvent);
+        SaveEquipped = StageManager.Instance.Save_artifactSOs;
+    }
+
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<EquipItemEvent>(HandleEquipItemEvent);
+    }
+
+    private void Start()
+    {
+        foreach (var item in SaveEquipped.ToArray())
+        {
+            playerChannel.RasiseEvent(  
+                PlayerEvents.EquipItemEvent.Init(item)
+            );
+        }
     }
 
     private void HandleEquipItemEvent(EquipItemEvent @event)
     {
-        _equipped.Add(@event.artifactSO);
+        Equipped.Add(@event.artifactSO);
         GameOverManager.Instance.EarnedItemCount++;
         Fire(TriggerType.OnEquip, new ArtifactContext { player = _playerStats });
     }
@@ -30,7 +47,7 @@ public class ArtifactManager : MonoSingleton<ArtifactManager>
     public void Unequip(ArtifactSO artifact)
     {
         Fire(TriggerType.OnUnequip, new ArtifactContext { player = _playerStats });
-        _equipped.Remove(artifact);
+        Equipped.Remove(artifact);
 
         foreach (var effect in artifact.Effects)
             _timers.Remove(effect);
@@ -40,7 +57,7 @@ public class ArtifactManager : MonoSingleton<ArtifactManager>
 
     public ArtifactContext Fire(TriggerType trigger, ArtifactContext ctx)
     {
-        foreach (var artifact in _equipped)
+        foreach (var artifact in Equipped)
             foreach (var effect in artifact.Effects)
                 if (effect.trigger == trigger)
                     effect.Apply(ctx);

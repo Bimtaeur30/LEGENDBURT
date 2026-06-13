@@ -16,6 +16,7 @@ public class Player : ModuleOwner
     [SerializeField] private PlayerInputSO InputSO;
 
     public MovementModule MovementModule { get; private set; }
+    public ChatModule ChatModule { get; private set; }
 
     public Rigidbody Rigid { get; private set; }
     public bool IsDrifting { get; private set; }
@@ -34,10 +35,20 @@ public class Player : ModuleOwner
 
         Rigid = GetComponent<Rigidbody>();
         MovementModule = GetModule<MovementModule>();
+        ChatModule = GetModule<ChatModule>();
 
         PlayerChannel.AddListener<SetActivePlayerMovementInputEvent>(HandleSetActivePlayerMovementInputEvent);
+        PlayerChannel.AddListener<OnGameOverEvent>(HandleOnGameOverEvent);
+        PlayerChannel.AddListener<OnGameStartEvent>(HandleOnGameStartEvent);
     }
 
+
+    private void OnDestroy()
+    {
+        PlayerChannel.RemoveListener<SetActivePlayerMovementInputEvent>(HandleSetActivePlayerMovementInputEvent);
+        PlayerChannel.RemoveListener<OnGameOverEvent>(HandleOnGameOverEvent);
+        PlayerChannel.RemoveListener<OnGameStartEvent>(HandleOnGameStartEvent);
+    }
     private void HandleSetActivePlayerMovementInputEvent(SetActivePlayerMovementInputEvent @event)
     {
         ToggleMovementInput(@event.IsActive);
@@ -58,7 +69,7 @@ public class Player : ModuleOwner
     private void Update()
     {
         if (Keyboard.current.f1Key.wasPressedThisFrame)
-            PlayerChannel.RasiseEvent(PlayerEvents.OnCardSelectEvent); // Å×½ºÆ® ÆÄÃ÷ È¹µæ
+            PlayerChannel.RasiseEvent(PlayerEvents.OnItemSelectEvent);
         if (Keyboard.current.f2Key.wasPressedThisFrame)
             PlayerChannel.RasiseEvent(PlayerEvents.EquipItemEvent.Init(TestArtifactSO)); // Å×½ºÆ® À¯¹° È¹µæ
         if (Keyboard.current.f3Key.wasPressedThisFrame)
@@ -98,5 +109,21 @@ public class Player : ModuleOwner
         MoveDir = Vector3.zero;
         IsDrifting = false;
         //Rigid.linearVelocity = Vector3.zero;
+    }
+
+    private void HandleOnGameOverEvent(OnGameOverEvent @event)
+    {
+        if (@event.IsGameSuccess)
+        {
+            ChatModule.GenerateChat("ÈÞ »ì¾Ò´Ù");
+        }
+        else
+        {
+            ChatModule.GenerateChat("¤Ð¤Ð¤Ð");
+        }
+    }
+    private void HandleOnGameStartEvent(OnGameStartEvent @event)
+    {
+        ChatModule.GenerateChat("±Þ¶ËÀÌ´Ù!!");
     }
 }

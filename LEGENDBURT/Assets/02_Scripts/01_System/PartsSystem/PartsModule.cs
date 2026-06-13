@@ -1,3 +1,4 @@
+using Assets._02_Scripts._01_System.Stage;
 using System;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
@@ -10,12 +11,13 @@ public enum PartsJointPos
 public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
 {
     [SerializeField] private EventChannelSO playerChannel;
+    [SerializeField] private EventChannelSO stageChannel;
     [SerializeField] private Transform PartsJoint_01;
     [SerializeField] private Transform PartsJoint_02;
 
     private Player player;
-    private IParts currentFirstParts;
-    private IParts currentSecondParts;
+    public IParts CurrentFirstParts { get; private set; } = null;
+    public IParts CurrentSecondParts { get; private set; } = null;
     public void Initialize(ModuleOwner owner)
     {
         player = owner as Player;
@@ -25,17 +27,35 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
         playerChannel.AddListener<AttachPartsEvent>(HandleAttachPartsEvent);
         playerChannel.AddListener<RemovePartsEvent>(HandleRemovePartsEvent);
         playerChannel.AddListener<ActivePartsEvent>(HandleActivePartsEvent);
+
+        stageChannel.AddListener<GetEquipedPartsDataEvent>(HandleGetEquipedPartsDataEvent);
+    }
+    private void OnDestroy()
+    {
+        playerChannel.RemoveListener<AttachPartsEvent>(HandleAttachPartsEvent);
+        playerChannel.RemoveListener<RemovePartsEvent>(HandleRemovePartsEvent);
+        playerChannel.RemoveListener<ActivePartsEvent>(HandleActivePartsEvent);
+
+        stageChannel.RemoveListener<GetEquipedPartsDataEvent>(HandleGetEquipedPartsDataEvent);
+    }
+    private void HandleGetEquipedPartsDataEvent(GetEquipedPartsDataEvent @event)
+    {
+        PartsDataSO data1 = (CurrentFirstParts == null ? null : CurrentFirstParts.PartsDataSO);
+        PartsDataSO data2 = (CurrentSecondParts == null ? null : CurrentSecondParts.PartsDataSO);
+        @event.ReciveAction?.Invoke((data1, data2));
     }
 
     private void HandleActivePartsEvent(ActivePartsEvent @event)
     {
-        if (@event.JointPos == PartsJointPos.FirstSlot && currentFirstParts != null)
+        if (@event.JointPos == PartsJointPos.FirstSlot && CurrentFirstParts != null)
         {
-            currentFirstParts.Activate();
+            CurrentFirstParts.Activate();
+            player.ChatModule.GenerateChat(CurrentFirstParts.PartsDataSO.PartsName + " 발동!");
         }
-        else if (@event.JointPos == PartsJointPos.SecondSlot && currentSecondParts != null)
+        else if (@event.JointPos == PartsJointPos.SecondSlot && CurrentSecondParts != null)
         {
-            currentSecondParts.Activate();
+            CurrentSecondParts.Activate();
+            player.ChatModule.GenerateChat(CurrentSecondParts.PartsDataSO.PartsName + " 발동!");
         }
     }
     private void HandleRemovePartsEvent(RemovePartsEvent @event)
@@ -46,29 +66,31 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
         switch(@event.JointPos)
         {
             case PartsJointPos.FirstSlot:
-                currentFirstParts = null;
+                CurrentFirstParts = null;
                 break;
             case PartsJointPos.SecondSlot:
-                currentSecondParts = null;
+                CurrentSecondParts = null;
                 break;
         }
     }
     private void HandleAttachPartsEvent(AttachPartsEvent @event)
     {
+        if (@event.Parts == null) return;
+
         Transform joint = GetJointTransform(@event.JointPos);
 
         DestroyChilds(joint);
 
-        PartBase instance = InstantiateToJoint(@event.Parts, joint);
+        PartBase instance = InstantiateToJoint(@event.Parts.PartPrefab, joint);
 
         switch (@event.JointPos)
         {
             case PartsJointPos.FirstSlot:
-                currentFirstParts = instance;
+                CurrentFirstParts = instance;
                 break;
 
             case PartsJointPos.SecondSlot:
-                currentSecondParts = instance;
+                CurrentSecondParts = instance;
                 break;
         }
 

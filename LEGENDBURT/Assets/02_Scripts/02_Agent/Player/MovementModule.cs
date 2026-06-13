@@ -25,7 +25,7 @@ public class MovementModule : MonoBehaviour, IModule
     [SerializeField] private Transform meshRR;
 
     [Header("Engine")]
-    [SerializeField] public float MotorTorque = 800f;
+    [SerializeField] public float MotorTorque = 1000f;
     [SerializeField] private float brakeTorque = 3000f;
     [SerializeField] private float maxSteerAngle = 30f;
     [SerializeField] private float steerSmoothTime = 0.12f;
@@ -39,17 +39,36 @@ public class MovementModule : MonoBehaviour, IModule
     [Header("Downforce")]
     [SerializeField] private float downforce = 100f;
 
+    [Header("Ground Detection")]
+    [SerializeField] private float wheelCheckRadius = 0.35f;
+    [SerializeField] private LayerMask trackLayerMask;
+
     private Player player;
     private float smoothedSteer;
     private float currentStiffness;
+    private float _originMortorTorque = 0;
+    private bool _wasOnTrack = true;
 
     public float Speed => speed;
     public float SignedSpeed => signedSpeed;
+
+    public void OnGround()
+    {
+        player.Rigid.linearDamping = 1f;
+        MotorTorque = _originMortorTorque / 5;
+    }
+
+    public void OnRoad()
+    {
+        player.Rigid.linearDamping = 0;
+        MotorTorque = _originMortorTorque;
+    }
 
     public void Initialize(ModuleOwner owner)
     {
         player = owner as Player;
         currentStiffness = normalStiffness;
+        _originMortorTorque = MotorTorque;
     }
 
     private void FixedUpdate() => FixedTick();
@@ -62,6 +81,7 @@ public class MovementModule : MonoBehaviour, IModule
         ApplyDrift();
         ApplyDownforce();
         UpdateWheelMeshes();
+        CheckGroundState();
 
         speed = player.Rigid.linearVelocity.magnitude;
 
@@ -188,6 +208,36 @@ public class MovementModule : MonoBehaviour, IModule
     private void ApplyDownforce()
     {
         player.Rigid.AddForce(-transform.up * downforce);
+    }
+
+    // ── Ground Detection ──────────────────────────────────────
+
+    private void CheckGroundState()
+    {
+        bool isOnTrack = IsAnyWheelOnTrack();
+
+        if (isOnTrack && !_wasOnTrack)
+        {
+            OnRoad();
+        }
+        else if (!isOnTrack && _wasOnTrack)
+        {
+            OnGround();
+        }
+
+        _wasOnTrack = isOnTrack;
+    }
+
+    private bool IsAnyWheelOnTrack()
+    {
+        return CheckWheel(wheelFL) && CheckWheel(wheelFR)
+            && CheckWheel(wheelRL) && CheckWheel(wheelRR);
+    }
+
+    private bool CheckWheel(WheelCollider wheel)
+    {
+        wheel.GetWorldPose(out Vector3 pos, out _);
+        return Physics.CheckSphere(pos, wheelCheckRadius, trackLayerMask);
     }
 
     // ── Wheel Mesh Sync ───────────────────────────────────────

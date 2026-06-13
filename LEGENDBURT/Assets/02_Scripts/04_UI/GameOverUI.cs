@@ -1,23 +1,35 @@
+using Assets._02_Scripts._01_System.Stage;
 using DG.Tweening;
+using System;
+using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
+
     [Header("Events")]
     [SerializeField] private EventChannelSO playerChannel;
+    [SerializeField] private EventChannelSO stageChannel;
     [Header("Title")]
     [SerializeField] private TextMeshProUGUI OnSuccessTitleTxt;
     [SerializeField] private TextMeshProUGUI OnFailTitleTxt;
     [Header("Stats")]
+    [SerializeField] private TextMeshProUGUI timeTxt;
     [SerializeField] private TextMeshProUGUI bestSpeedTxt;
     [SerializeField] private TextMeshProUGUI driftCountTxt;
     [SerializeField] private TextMeshProUGUI earnedItemCountTxt;
     [SerializeField] private TextMeshProUGUI fartCountTxt;
+    [Header("Button")]
+    [SerializeField] private Button nextBtn;
+    [SerializeField] private TextMeshProUGUI nextBtnTxt;
     [Header("Effect")]
     [SerializeField] private CanvasGroup[] hideCanvasGroup;
     [SerializeField] private CanvasGroup gameOverCanvasGroup;
     [SerializeField] private TopBottomBarLabel tbbl;
+
     private void Awake()
     {
         playerChannel.AddListener<OnGameOverEvent>(HandleOnGameOverEvent);
@@ -39,6 +51,9 @@ public class GameOverUI : MonoBehaviour
         OnSuccessTitleTxt.gameObject.SetActive(@event.IsGameSuccess);
         OnFailTitleTxt.gameObject.SetActive(!@event.IsGameSuccess);
 
+        nextBtnTxt.text = @event.IsGameSuccess ? "다음 스테이지" : "로비로 돌아가기";
+        nextBtn.onClick.AddListener(() => HandleNextBtnClick(@event.IsGameSuccess));
+
         foreach (CanvasGroup cg in hideCanvasGroup)
         {
             cg.interactable = false;
@@ -47,10 +62,47 @@ public class GameOverUI : MonoBehaviour
         gameOverCanvasGroup.interactable = true;
         gameOverCanvasGroup.DOFade(1f, 1f);
 
+        ShowStatsTxt();
+        ShowRecordTimeTxt();
+        tbbl.Show();
+    }
+
+    private void HandleNextBtnClick(bool isSuccess)
+    {
+        Debug.Log("HandleNextBtnClick 실행" + " isSuccess: " + isSuccess);
+
+        if (isSuccess)
+        {
+            stageChannel.RasiseEvent(
+                StageEvents.GetEquipedPartsDataEvent.Init(HandleReciveData)
+            );
+        }
+        else
+        {
+            stageChannel.RasiseEvent(StageEvents.RemoveStageSaveDataEvent);
+        }
+    }
+
+    private void HandleReciveData((PartsDataSO, PartsDataSO) tuple)
+    {
+        Debug.Log("HandleReciveData 실행");
+        stageChannel.RasiseEvent(StageEvents.MoveNextStageEvent.Init(tuple.Item1, tuple.Item2, ArtifactManager.Instance.Equipped));
+    }
+
+    private void ShowStatsTxt()
+    {
         bestSpeedTxt.text = "최대속도: " + GameOverManager.Instance.BestSpeed.ToString();
         fartCountTxt.text = "방귀 뀐 횟수: " + GameOverManager.Instance.FartCount.ToString();
         driftCountTxt.text = "드리프트 횟수: " + GameOverManager.Instance.DriftCount.ToString();
         earnedItemCountTxt.text = "획득한 유물 개수: " + GameOverManager.Instance.EarnedItemCount.ToString();
-        tbbl.Show();
+    }
+    private void ShowRecordTimeTxt()
+    {
+        TimeSpan time = TimeSpan.FromSeconds(RecordTimeManager.Instance.RecordTime);
+        string display = string.Format("{0:D2}:{1:D2}.{2:D2}",
+            time.Minutes,
+            time.Seconds,
+            time.Milliseconds / 10); // 100ms 단위 → 2자리
+        timeTxt.text = display;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PartsDataSO", menuName = "Library/PartsDataSO")]
+[CreateAssetMenu(fileName = "BoosterPartsDataSO", menuName = "Library/PartsDataSO/BoosterPartsDataSO")]
 public class BoosterPartsDataSO : PartsDataSO
 {
     public ParticleSystem BoostParticlePrefab;
