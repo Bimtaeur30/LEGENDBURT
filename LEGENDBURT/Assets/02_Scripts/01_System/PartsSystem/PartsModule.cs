@@ -1,7 +1,6 @@
 using Assets._02_Scripts._01_System.Stage;
 using System;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public enum PartsJointPos
 {

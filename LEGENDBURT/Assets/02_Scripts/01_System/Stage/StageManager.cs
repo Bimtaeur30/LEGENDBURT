@@ -11,7 +11,7 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private EventChannelSO playerChannel;
     [SerializeField] private EventChannelSO stageChannel;
 
-    [SerializeField] private int currentStageIndex = 0; // 테스트로 0 해뒀음, 실제로는 로비에서는 -1상태, 스테이지 1 시작 시 0을 보장해야함.
+    [SerializeField] private int currentStageIndex = -1; // 테스트로 0 해뒀음, 실제로는 로비에서는 -1상태, 스테이지 1 시작 시 0을 보장해야함.
 
     public StageDataSO CurrentStageData { get; private set; } = null;
     public PartsDataSO Save_parts1 { get; private set; } = null;
@@ -94,7 +94,7 @@ public class StageManager : MonoSingleton<StageManager>
             Save_parts2 = @event.SecondParts;
             Save_artifactSOs = @event.ArtifactLIst;
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("01_MainGame");
         }
     }
     private void HandleCreateStageSaveDataEvent(CreateStageSaveDataEvent @event)
@@ -103,10 +103,10 @@ public class StageManager : MonoSingleton<StageManager>
     }
     private void HandleRemoveStageSaveDataEvent(RemoveStageSaveDataEvent @event)
     {
-        currentStageIndex = 0; // 테스트로 0 해둔거임, -1로 고쳐야함
+        currentStageIndex = -1; // 테스트로 0 해둔거임, -1로 고쳐야함
         Save_parts1 = null;
         Save_parts2 = null;
-        Save_artifactSOs.Clear();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Save_artifactSOs?.Clear();
+        SceneManager.LoadScene("03_Menu");
     }
 }

@@ -29,11 +29,14 @@ public class ArtifactManager : MonoSingleton<ArtifactManager>
 
     private void Start()
     {
-        foreach (var item in SaveEquipped.ToArray())
+        if (SaveEquipped != null)
         {
-            playerChannel.RasiseEvent(  
-                PlayerEvents.EquipItemEvent.Init(item)
-            );
+            foreach (var item in SaveEquipped.ToArray())
+            {
+                playerChannel.RasiseEvent(
+                    PlayerEvents.EquipItemEvent.Init(item)
+                );
+            }
         }
     }
 
