@@ -1,8 +1,12 @@
 using Assets._02_Scripts._01_System.Stage;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using TMPro;
+using Unity.Services.Leaderboards;
+using Unity.Services.Leaderboards.Models;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -29,6 +33,10 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] private CanvasGroup[] hideCanvasGroup;
     [SerializeField] private CanvasGroup gameOverCanvasGroup;
     [SerializeField] private TopBottomBarLabel tbbl;
+    [Header("LeaderBoard")]
+    [SerializeField] private LeaderboardLabel_UI leaderboardLabel_UI;
+    [SerializeField] private Transform leaderboardLabel_Parent;
+
 
     private void Awake()
     {
@@ -65,6 +73,8 @@ public class GameOverUI : MonoBehaviour
         ShowStatsTxt();
         ShowRecordTimeTxt();
         tbbl.Show();
+
+        GenerateLeaderBoardUI();
     }
 
     private void HandleNextBtnClick(bool isSuccess)
@@ -104,5 +114,25 @@ public class GameOverUI : MonoBehaviour
             time.Seconds,
             time.Milliseconds / 10); // 100ms 단위 → 2자리
         timeTxt.text = display;
+    }
+
+    private async void GenerateLeaderBoardUI()
+    {
+        await Task.Delay(500);
+
+        var list =
+            await LeaderboardManager.Instance
+                .GetTop20(
+                    (StageType)(StageManager.Instance.CurrentStageIndex));
+
+        foreach (var entry in list)
+        {
+            LeaderboardLabel_UI label = Instantiate(leaderboardLabel_UI, leaderboardLabel_Parent);
+            label.Initialize(entry.Rank + 1, entry.PlayerName, (float)entry.Score);
+            Debug.Log(
+                $"{entry.Rank + 1}위 " +
+                $"{entry.PlayerName} " +
+                $"{entry.Score}");
+        }
     }
 }

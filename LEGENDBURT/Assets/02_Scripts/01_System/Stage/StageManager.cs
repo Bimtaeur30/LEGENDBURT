@@ -11,7 +11,7 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private EventChannelSO playerChannel;
     [SerializeField] private EventChannelSO stageChannel;
 
-    [SerializeField] private int currentStageIndex = -1; // 테스트로 0 해뒀음, 실제로는 로비에서는 -1상태, 스테이지 1 시작 시 0을 보장해야함.
+    [field: SerializeField] public int CurrentStageIndex { get; private set; } = -1; // 테스트로 0 해뒀음, 실제로는 로비에서는 -1상태, 스테이지 1 시작 시 0을 보장해야함.
 
     public StageDataSO CurrentStageData { get; private set; } = null;
     public PartsDataSO Save_parts1 { get; private set; } = null;
@@ -41,7 +41,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (currentStageIndex >= 0)
+        if (CurrentStageIndex >= 0)
         {
             InitializeStage();
         }
@@ -59,7 +59,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void InitializeStage()
     {
-        CurrentStageData = stageData[currentStageIndex];
+        CurrentStageData = stageData[CurrentStageIndex];
         Stage stage = Instantiate(CurrentStageData.StagePrefab, Vector3.zero, Quaternion.identity);
         stage.Initialize();
     }
@@ -79,9 +79,9 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void HandleMoveNextStageEvent(MoveNextStageEvent @event)
     {
-        if (currentStageIndex >= stageData.Length - 1)
+        if (CurrentStageIndex >= stageData.Length - 1)
         {
-            currentStageIndex = -1;
+            CurrentStageIndex = -1;
             Save_parts1 = null;
             Save_parts2 = null;
             Save_artifactSOs.Clear();
@@ -89,7 +89,7 @@ public class StageManager : MonoSingleton<StageManager>
         }
         else
         {
-            currentStageIndex++;
+            CurrentStageIndex++;
             Save_parts1 = @event.FirstParts;
             Save_parts2 = @event.SecondParts;
             Save_artifactSOs = @event.ArtifactLIst;
@@ -99,11 +99,11 @@ public class StageManager : MonoSingleton<StageManager>
     }
     private void HandleCreateStageSaveDataEvent(CreateStageSaveDataEvent @event)
     {
-        currentStageIndex = 0;
+        CurrentStageIndex = 0;
     }
     private void HandleRemoveStageSaveDataEvent(RemoveStageSaveDataEvent @event)
     {
-        currentStageIndex = -1; // 테스트로 0 해둔거임, -1로 고쳐야함
+        CurrentStageIndex = -1; // 테스트로 0 해둔거임, -1로 고쳐야함
         Save_parts1 = null;
         Save_parts2 = null;
         Save_artifactSOs?.Clear();

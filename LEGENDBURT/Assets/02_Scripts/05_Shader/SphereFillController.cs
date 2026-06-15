@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SphereFillController : MonoBehaviour
+public class SphereFillController : MonoBehaviour//
 {
     public enum FillAxis { X = 0, Y = 1, Z = 2 }
     public enum FillDirection { Positive = 1, Negative = -1 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   <PartsName>k__BackingField: "\uC2A4\uD30C\uD074\uBC29\uAD6C"
   <PartsGrade>k__BackingField: 0
   <PartsGradeData>k__BackingField: {fileID: 11400000, guid: beb439329a094df498cc20fd4e0e9082, type: 2}
-  <PartsIcon>k__BackingField: {fileID: 21300000, guid: 88f470276c7deae4a8ffd0dfb2942876, type: 3}
+  <PartsIcon>k__BackingField: {fileID: 21300000, guid: 2a58ada5863ba2e41b4f958b0d115cc4, type: 3}
   <PartPrefab>k__BackingField: {fileID: 7683231801431176997, guid: b022c742b9018264e843b42b8e32932a, type: 3}
   <CoolTime>k__BackingField: 10
   <PartsDescription>k__BackingField: "\uD30C\uC6CC 50, \uB9E1\uC73C\uBA74 \uAC10\uC804\uB420
