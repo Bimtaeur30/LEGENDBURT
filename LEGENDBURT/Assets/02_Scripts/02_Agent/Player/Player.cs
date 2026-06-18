@@ -20,6 +20,7 @@ public class Player : ModuleOwner
 
     public Rigidbody Rigid { get; private set; }
     public bool IsDrifting { get; private set; }
+    public bool IsBraking { get; private set; }
     private bool isMovementInputEnabled = true;
 
 
@@ -28,6 +29,7 @@ public class Player : ModuleOwner
         base.InitializeComponents();
         InputSO.OnMoveChanged += HandleMoveChanged;
         InputSO.OnDriftChanged += HandleDriftChanged;
+        InputSO.OnBrakingChanged += HandleBrakeChanged;
         InputSO.OnBoostPressed += HandleBoostPressed;
 
         InputSO.OnPartsActivePressed_01 += HandleOnPartsActivePressed_01;
@@ -93,6 +95,7 @@ public class Player : ModuleOwner
     private void HandleMoveChanged(Vector2 vector)
     {
         if (!isMovementInputEnabled) return;
+        if (!!IsBraking) return;
         MoveDir = vector;
     }
 
@@ -102,6 +105,12 @@ public class Player : ModuleOwner
         if (obj == true)
             GameOverManager.Instance.DriftCount++;
         IsDrifting = obj;
+    }
+    private void HandleBrakeChanged(bool obj)
+    {
+        //if (!isMovementInputEnabled) return;
+        //MoveDir = Vector3.zero;
+        //IsBraking = obj;
     }
     private void ToggleMovementInput(bool active)
     {

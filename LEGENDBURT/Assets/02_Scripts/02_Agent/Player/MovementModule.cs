@@ -144,7 +144,7 @@ public class MovementModule : MonoBehaviour, IModule
         float input = player.MoveDir.y;
         bool isMovingForward = SignedSpeed > 0.5f;
 
-        float brake = (isMovingForward && input < 0f)
+        float brake = ((isMovingForward && input < 0f))
             ? brakeTorque
             : Mathf.Abs(input) < 0.05f ? brakeTorque * 0.3f : 0f;
 

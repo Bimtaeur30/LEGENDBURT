@@ -7,9 +7,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 {
     public Vector2 MoveInput { get; private set; }
     public bool IsDrifting { get; private set; }
+    public bool IsBraking { get; private set; }
 
     public event Action<Vector2> OnMoveChanged;
     public event Action<bool> OnDriftChanged;
+    public event Action<bool> OnBrakingChanged;
     public event Action OnBoostPressed;
 
     public event Action OnPartsActivePressed_01;
@@ -57,5 +59,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         if (context.performed)
             OnPartsActivePressed_02?.Invoke();
+    }
+
+    public void OnBrake(InputAction.CallbackContext context)
+    {
+        IsBraking = context.phase == InputActionPhase.Performed;
+        OnBrakingChanged?.Invoke(IsBraking);
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactSO
   ArtifactName: "\uC816\uBA39\uB358 \uD798\uAE4C\uC9C0 \uBC29\uAD6C"
   Icon: {fileID: 21300000, guid: 910f5ac75c6f0ac448d3ef72a3777211, type: 3}
-  Description: "\uBC29\uAD6C \uD0C0\uC774\uBC0D \uB9DE\uCD94\uAE30 \uC2E4\uD328 \uC2DC\n30%\uC758
+  Description: "\uBC29\uAD6C \uD0C0\uC774\uBC0D \uB9DE\uCD94\uAE30 \uC2E4\uD328 \uC2DC\n10%\uC758
     \uD655\uB960\uB85C \uBC29\uADC0\uAC00 \uBC1C\uB3D9\uB429\uB2C8\uB2E4."
   Effects:
   - {fileID: 11400000, guid: 067ef29dec62aaf409cc26589fab15c3, type: 2}
