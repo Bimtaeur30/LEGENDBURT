@@ -2,6 +2,7 @@
 
 namespace JJH._02_Scripts.Systems.ObjectPoolSystems
 {
+    [DefaultExecutionOrder(-100)]
     public class PoolInitializer : MonoBehaviour
     {
         [field: SerializeField] public PoolManagerSO PoolManager { get; private set; }
@@ -16,7 +17,7 @@ namespace JJH._02_Scripts.Systems.ObjectPoolSystems
             }
 
             PoolManager.InitializePool(transform);
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
         public T Pop<T>(PoolItemSO item) where T : IPoolable

@@ -4,10 +4,13 @@ using UnityEngine;
 public class Stage : MonoBehaviour
 {
     [SerializeField] private Transform playerSpawnPoint;
+    [SerializeField] private EventChannelSO soundChannel;
+    [SerializeField] private SoundClipSO bgmClip;
     public void Initialize() { }
     private void Start()
     {
         StartCoroutine(SetPlayerPos());
+        soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(bgmClip));
     }
     private IEnumerator SetPlayerPos()
     {

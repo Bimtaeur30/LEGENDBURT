@@ -11,7 +11,7 @@ public abstract class PartBase : MonoBehaviour, IParts
         player = owner as Player;
     }
 
-    public abstract void Activate();
+    public abstract bool Activate();
     public abstract void Deactivate();
     public abstract void DestroyParts();
 }

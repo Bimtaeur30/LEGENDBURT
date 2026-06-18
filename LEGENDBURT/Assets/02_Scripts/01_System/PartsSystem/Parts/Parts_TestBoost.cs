@@ -30,9 +30,9 @@ public class Parts_TestBoost : PartBase
         particle.Stop();
     }
 
-    public override void Activate()
+    public override bool Activate()
     {
-        if (isCoolTime) return;
+        if (isCoolTime) return false;
         Debug.Log($"name = {gameObject.name}");
         Debug.Log($"activeSelf = {gameObject.activeSelf}");
         Debug.Log($"activeInHierarchy = {gameObject.activeInHierarchy}");
@@ -42,6 +42,8 @@ public class Parts_TestBoost : PartBase
         StartCoroutine(BoostCoroutine());
         particle.Play();
         source.GenerateImpulse();
+
+        return true;
     }
 
 

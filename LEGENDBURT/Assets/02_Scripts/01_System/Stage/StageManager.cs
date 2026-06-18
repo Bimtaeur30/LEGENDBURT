@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(-100)]
 public class StageManager : MonoSingleton<StageManager>
 {
-    [field:SerializeField] public StageDataSO[] stageData { get; private set; }
+    [field:SerializeField] public StageDataSO[] StageData { get; private set; }
+    [field:SerializeField] public StageDataSO Tuto_stageData { get; private set; }
+
     [SerializeField] private EventChannelSO playerChannel;
     [SerializeField] private EventChannelSO stageChannel;
 
@@ -25,9 +27,11 @@ public class StageManager : MonoSingleton<StageManager>
         //playerChannel.AddListener<EquipItemEvent>(HandleEquipItemEvent);
 
         stageChannel.AddListener<MoveNextStageEvent>(HandleMoveNextStageEvent);
+        stageChannel.AddListener<LoadTutorialEvent>(HandleLoadTutorialEvent);
         stageChannel.AddListener<CreateStageSaveDataEvent>(HandleCreateStageSaveDataEvent);
         stageChannel.AddListener<RemoveStageSaveDataEvent>(HandleRemoveStageSaveDataEvent);
     }
+
 
     private void OnEnable()
     {
@@ -45,6 +49,10 @@ public class StageManager : MonoSingleton<StageManager>
         {
             InitializeStage();
         }
+        else if (CurrentStageIndex == -2)
+        {
+            InitializeTutorial();
+        }
     }
 
     private void OnDestroy()
@@ -53,13 +61,21 @@ public class StageManager : MonoSingleton<StageManager>
         //playerChannel.RemoveListener<EquipItemEvent>(HandleEquipItemEvent);
 
         stageChannel.RemoveListener<MoveNextStageEvent>(HandleMoveNextStageEvent);
+        stageChannel.RemoveListener<LoadTutorialEvent>(HandleLoadTutorialEvent);
         stageChannel.RemoveListener<CreateStageSaveDataEvent>(HandleCreateStageSaveDataEvent);
         stageChannel.RemoveListener<RemoveStageSaveDataEvent>(HandleRemoveStageSaveDataEvent);
     }
 
     private void InitializeStage()
     {
-        CurrentStageData = stageData[CurrentStageIndex];
+        CurrentStageData = StageData[CurrentStageIndex];
+        Stage stage = Instantiate(CurrentStageData.StagePrefab, Vector3.zero, Quaternion.identity);
+        stage.Initialize();
+    }
+
+    private void InitializeTutorial()
+    {
+        CurrentStageData = Tuto_stageData;
         Stage stage = Instantiate(CurrentStageData.StagePrefab, Vector3.zero, Quaternion.identity);
         stage.Initialize();
     }
@@ -79,7 +95,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void HandleMoveNextStageEvent(MoveNextStageEvent @event)
     {
-        if (CurrentStageIndex >= stageData.Length - 1)
+        if (CurrentStageIndex >= StageData.Length - 1)
         {
             CurrentStageIndex = -1;
             Save_parts1 = null;
@@ -108,5 +124,13 @@ public class StageManager : MonoSingleton<StageManager>
         Save_parts2 = null;
         Save_artifactSOs?.Clear();
         SceneManager.LoadScene("03_Menu");
+    }
+    private void HandleLoadTutorialEvent(LoadTutorialEvent @event)
+    {
+        CurrentStageIndex = -2;
+        Save_parts1 = null;
+        Save_parts2 = null;
+        Save_artifactSOs?.Clear();
+        SceneManager.LoadScene("04_Tutorial");
     }
 }

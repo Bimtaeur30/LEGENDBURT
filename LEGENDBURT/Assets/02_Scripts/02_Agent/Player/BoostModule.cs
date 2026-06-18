@@ -7,6 +7,8 @@ using UnityEngine;
 public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
 {
     [SerializeField] private EventChannelSO PlayerChannel;
+    [SerializeField] private EventChannelSO SoundChannel;
+    [SerializeField] private SoundClipSO FartSoundClip;
 
     [SerializeField] private float boostForce = 200f;
     [SerializeField] private ParticleSystem burtParticle;
@@ -39,6 +41,7 @@ public class BoostModule : MonoBehaviour, IModule, IAfterInitModule
 
     public void Activate_Burt()
     {
+        SoundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(FartSoundClip, transform, 0));
         ArtifactContext at = new ArtifactContext();
         at.player = player;
         at.SetModule(this);

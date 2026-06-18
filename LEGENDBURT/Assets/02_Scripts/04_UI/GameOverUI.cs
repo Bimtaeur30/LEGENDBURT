@@ -36,6 +36,13 @@ public class GameOverUI : MonoBehaviour
     [Header("LeaderBoard")]
     [SerializeField] private LeaderboardLabel_UI leaderboardLabel_UI;
     [SerializeField] private Transform leaderboardLabel_Parent;
+    [Header("Sound")]
+    [SerializeField] private EventChannelSO SoundChannel;
+    [SerializeField] private SoundClipSO FailSoundClip;
+    [SerializeField] private SoundClipSO SuccessSoundClip;
+    [SerializeField] private SoundClipSO TickClip;
+
+
 
 
     private void Awake()
@@ -60,6 +67,11 @@ public class GameOverUI : MonoBehaviour
         OnFailTitleTxt.gameObject.SetActive(!@event.IsGameSuccess);
 
         nextBtnTxt.text = @event.IsGameSuccess ? "다음 스테이지" : "로비로 돌아가기";
+        if (@event.IsGameSuccess)
+            SoundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(SuccessSoundClip));
+        else
+            SoundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(FailSoundClip));
+
         nextBtn.onClick.AddListener(() => HandleNextBtnClick(@event.IsGameSuccess));
 
         foreach (CanvasGroup cg in hideCanvasGroup)
@@ -118,7 +130,7 @@ public class GameOverUI : MonoBehaviour
 
     private async void GenerateLeaderBoardUI()
     {
-        await Task.Delay(500);
+        await Task.Delay(300);
 
         var list =
             await LeaderboardManager.Instance
@@ -133,6 +145,9 @@ public class GameOverUI : MonoBehaviour
                 $"{entry.Rank + 1}위 " +
                 $"{entry.PlayerName} " +
                 $"{entry.Score}");
+
+            SoundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(TickClip));
+            await Task.Delay(200);
         }
     }
 }

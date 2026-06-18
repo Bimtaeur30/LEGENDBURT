@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d6f1f1a8a4ecd4ea4576a2b254c2f5, type: 3}
+  m_Name: TutorialData_Drift
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialData
+  <TutorialTitle>k__BackingField: "# \uB4DC\uB9AC\uD504\uD2B8"
+  <TutorialDescription>k__BackingField: "\uB4DC\uB9AC\uD504\uD2B8\uB294 [SHIFT]\uB97C
+    \uB20C\uB7EC \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uB2E8, \uB108\uBB34 \uAE38\uAC8C\uD558\uBA74
+    \uB4B7\uBC14\uD034\uAC00 \uC811\uC9C0\uB825\uC744 \uC783\uC5B4 \uD55C\uBC14\uD034\uB97C
+    \uB3CC\uC544\uBC84\uB9B4 \uC218 \uC788\uC73C\uB2C8 \uC9E7\uAC8C \uB4DC\uB9AC\uD504\uD2B8\uB97C
+    \uC720\uC9C0\uD558\uB294\uAC78 \uCD94\uCC9C\uB4DC\uB9BD\uB2C8\uB2E4."
+  <TutorialVideo>k__BackingField: {fileID: 32900000, guid: 5d673e22c34a8a34e99af7b35d8f86ef, type: 3}

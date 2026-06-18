@@ -75,7 +75,7 @@ public class RPM : MonoBehaviour
         ChargeSlider.maxValue = MaxSlot;
         ChargeSlider.value = 0f;
 
-        chargeCoroutine = StartCoroutine(ChargeCoroutine());
+        PlayerChannel.AddListener<OnGameStartEvent>(HandleOnGameStartEvent);
     }
 
     private void OnDisable()
@@ -85,6 +85,8 @@ public class RPM : MonoBehaviour
             StopCoroutine(chargeCoroutine);
             chargeCoroutine = null;
         }
+
+        PlayerChannel.RemoveListener<OnGameStartEvent>(HandleOnGameStartEvent);
     }
 
     private void InitializeSlots()
@@ -217,5 +219,10 @@ public class RPM : MonoBehaviour
         seq.Append(ComboTxt.transform.DOScale(0.8f, 0.2f));
         seq.Append(ComboTxt.transform.DOScale(1.2f, 0.1f));
         seq.Append(ComboTxt.transform.DOScale(1f, 0.2f));
+    }
+
+    private void HandleOnGameStartEvent(OnGameStartEvent @event)
+    {
+        chargeCoroutine = StartCoroutine(ChargeCoroutine());
     }
 }

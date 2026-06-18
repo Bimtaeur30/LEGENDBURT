@@ -48,17 +48,17 @@ public class LeaderboardManager : MonoSingleton<LeaderboardManager>
         if (!AuthenticationService.Instance.IsSignedIn)
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-#if UNITY_EDITOR
-        // 에디터에서는 씬 전환 시 LeaderboardsService.s_Instance가 리셋되는 이슈가 있어
-        // Core를 재초기화해서 강제로 재등록 시도
-        int retry = 0;
-        while (!IsLeaderboardsReady() && retry < 20)
-        {
-            await UnityServices.InitializeAsync();
-            await Task.Delay(100);
-            retry++;
-        }
-#endif
+        #if UNITY_EDITOR
+                // 에디터에서는 씬 전환 시 LeaderboardsService.s_Instance가 리셋되는 이슈가 있어
+                // Core를 재초기화해서 강제로 재등록 시도
+                int retry = 0;
+                while (!IsLeaderboardsReady() && retry < 20)
+                {
+                    await UnityServices.InitializeAsync();
+                    await Task.Delay(100);
+                    retry++;
+                }
+        #endif
     }
 
     private bool IsLeaderboardsReady()

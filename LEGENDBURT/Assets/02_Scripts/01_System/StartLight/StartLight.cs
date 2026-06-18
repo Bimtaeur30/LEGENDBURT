@@ -9,6 +9,9 @@ public class StartLight : MonoBehaviour
     [SerializeField] private EventChannelSO playerChannel;
     [SerializeField] private TextMeshProUGUI chatTxt;
     [SerializeField] private Animator animator;
+    [SerializeField] private EventChannelSO SoundChannel;
+    [SerializeField] private SoundClipSO BeepSoundClip;
+    [SerializeField] private SoundClipSO BeepSoundClip2;
 
     private void Awake()
     {
@@ -36,9 +39,11 @@ public class StartLight : MonoBehaviour
             GameObject light = lights[i];
             light.SetActive(true);
             chatTxt.text = (3 - i).ToString() + "...";
+            SoundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(BeepSoundClip, transform, 0));
             yield return new WaitForSeconds(1f); // 1초마다 빛 하나씩 증가
         }
 
+        SoundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(BeepSoundClip2, transform, 0));
         foreach (var part in lights)
             part.SetActive(false);
 

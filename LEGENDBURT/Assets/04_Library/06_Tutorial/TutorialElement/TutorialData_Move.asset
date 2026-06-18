@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d6f1f1a8a4ecd4ea4576a2b254c2f5, type: 3}
+  m_Name: TutorialData_Move
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialData
+  <TutorialTitle>k__BackingField: "# \uAE30\uBCF8\uC774\uB3D9"
+  <TutorialDescription>k__BackingField: "[W]/[D]\uB85C \uC55E/\uB4A4 \uC774\uB3D9\uC744
+    \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4. [A]/[D]\uB85C \uC88C\uC6B0 \uBC29\uD5A5\uC744
+    \uC870\uC808\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  <TutorialVideo>k__BackingField: {fileID: 32900000, guid: 9046f82ad183fe9438797ebfb1fee05b, type: 3}

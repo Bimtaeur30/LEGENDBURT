@@ -4819,6 +4819,9 @@ MonoBehaviour:
   playerChannel: {fileID: 11400000, guid: 6f7c4c26cf3a37f409eaa5d3864f5829, type: 2}
   chatTxt: {fileID: 3402704386748810890}
   animator: {fileID: 2447596539854131613}
+  SoundChannel: {fileID: 11400000, guid: 818b72b77f16ff547a87f701113c0df8, type: 2}
+  BeepSoundClip: {fileID: 11400000, guid: b60a2841e515a4c47bfa559b51fbe463, type: 2}
+  BeepSoundClip2: {fileID: 11400000, guid: 945717b6a15acec4f99fa4fcb9f9603e, type: 2}
 --- !u!1 &6255873097082103332
 GameObject:
   m_ObjectHideFlags: 0
@@ -5910,6 +5913,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stage
   playerSpawnPoint: {fileID: 8902248994075668416}
+  soundChannel: {fileID: 11400000, guid: 818b72b77f16ff547a87f701113c0df8, type: 2}
+  bgmClip: {fileID: 11400000, guid: 7ef78f7d99ad25048957d2837d41adec, type: 2}
 --- !u!1 &7500037795800297849
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,19 @@
+using Assets._02_Scripts._01_System.Stage;
 using TMPro;
 using Unity.Services.Authentication;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class NicknameManager : MonoBehaviour
+public class NicknameManager : MonoSingleton<NicknameManager>
 {
+    public bool IsNickNameChoosing { get; private set; } = false;
+
     [SerializeField]
     private TMP_InputField inputField;
     [SerializeField]
     private GameObject nickNamePanel;
+    [SerializeField]
+    private EventChannelSO stageChannel;
 
     private const string NicknameKey = "Nickname";
 
@@ -16,6 +22,10 @@ public class NicknameManager : MonoBehaviour
         if (PlayerPrefs.HasKey(NicknameKey))
         {
             nickNamePanel.gameObject.SetActive(false);
+        }
+        else
+        {
+            IsNickNameChoosing = true;
         }
     }
 
@@ -36,5 +46,17 @@ public class NicknameManager : MonoBehaviour
         PlayerPrefs.Save();
 
         nickNamePanel.gameObject.SetActive(false);
+        IsNickNameChoosing = false;
+
+        stageChannel.RasiseEvent(StageEvents.LoadTutorialEvent);
+    }
+
+    [ContextMenu("Delete Nickname Pref")]
+    public void DeleteNicknamePref()
+    {
+        PlayerPrefs.DeleteKey(NicknameKey);
+        PlayerPrefs.Save();
+
+        Debug.Log("Nickname Pref Deleted");
     }
 }

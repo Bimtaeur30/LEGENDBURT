@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1925f5b9ffaf843409bbe891b771207e, type: 3}
   m_Name: StageData_1
   m_EditorClassIdentifier: Assembly-CSharp::StageDataSO
-  StageName: "\uB514\uD384\uD2B8 \uADF8\uB791\uD504\uB9AC"
+  StageName: "\uB514\uD384\uD2B8 \uC11C\uD0B7"
   LimitedTime: 35
   StagePrefab: {fileID: 8173435091199678750, guid: 1bb150548167d344b81d74dbda81ea71, type: 3}

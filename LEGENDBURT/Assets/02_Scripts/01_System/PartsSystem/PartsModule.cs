@@ -11,8 +11,10 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
 {
     [SerializeField] private EventChannelSO playerChannel;
     [SerializeField] private EventChannelSO stageChannel;
+    [SerializeField] private EventChannelSO soundChannel;
     [SerializeField] private Transform PartsJoint_01;
     [SerializeField] private Transform PartsJoint_02;
+    [SerializeField] private SoundClipSO LesGoClip;
 
     private Player player;
     public IParts CurrentFirstParts { get; private set; } = null;
@@ -48,13 +50,19 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
     {
         if (@event.JointPos == PartsJointPos.FirstSlot && CurrentFirstParts != null)
         {
-            CurrentFirstParts.Activate();
-            player.ChatModule.GenerateChat(CurrentFirstParts.PartsDataSO.PartsName + " 발동!");
+            if (CurrentFirstParts.Activate())
+            {
+                player.ChatModule.GenerateChat(CurrentFirstParts.PartsDataSO.PartsName + " 발동!");
+                soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(LesGoClip, transform, 0));
+            }
         }
         else if (@event.JointPos == PartsJointPos.SecondSlot && CurrentSecondParts != null)
         {
-            CurrentSecondParts.Activate();
-            player.ChatModule.GenerateChat(CurrentSecondParts.PartsDataSO.PartsName + " 발동!");
+            if (CurrentSecondParts.Activate())
+            {
+                player.ChatModule.GenerateChat(CurrentSecondParts.PartsDataSO.PartsName + " 발동!");
+                soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(LesGoClip, transform, 0));
+            }
         }
     }
     private void HandleRemovePartsEvent(RemovePartsEvent @event)
