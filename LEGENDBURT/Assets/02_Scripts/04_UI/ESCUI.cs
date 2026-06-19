@@ -1,3 +1,5 @@
+using Assets._02_Scripts._01_System.Stage;
+using Coffee.UIEffects;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +7,11 @@ using UnityEngine.UI;
 
 public class ESCUI : MonoBehaviour
 {
+    [Header("Events")]
+    [SerializeField] private EventChannelSO stageChannel;
+    [SerializeField] private EventChannelSO soundChannel;
+    [SerializeField] private SoundClipSO swooshClip;
+
     [Header("UI")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform panelRect;
@@ -16,7 +23,6 @@ public class ESCUI : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button backButton;
-    [SerializeField] private Button restartButton;
     [SerializeField] private Button menuButton;
     [SerializeField] private Button quitButton;
 
@@ -44,7 +50,6 @@ public class ESCUI : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
 
         backButton.onClick.AddListener(CloseESC);
-        restartButton.onClick.AddListener(Restart);
         menuButton.onClick.AddListener(GoToMenu);
         quitButton.onClick.AddListener(QuitGame);
     }
@@ -78,6 +83,7 @@ public class ESCUI : MonoBehaviour
 
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(swooshClip));
 
         Time.timeScale = 0f;
     }
@@ -102,18 +108,14 @@ public class ESCUI : MonoBehaviour
 
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+        soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(swooshClip));
 
         Time.timeScale = 1f;
     }
 
-    private void Restart()
-    {
-        // TODO : 다시 시작
-    }
-
     private void GoToMenu()
     {
-        // TODO : 메뉴로 이동
+        stageChannel.RasiseEvent(StageEvents.RemoveStageSaveDataEvent);
     }
 
     private void QuitGame()

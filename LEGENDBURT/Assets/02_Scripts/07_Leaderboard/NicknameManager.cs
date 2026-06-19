@@ -25,6 +25,7 @@ public class NicknameManager : MonoSingleton<NicknameManager>
         }
         else
         {
+            nickNamePanel.gameObject.SetActive(true);
             IsNickNameChoosing = true;
         }
     }
