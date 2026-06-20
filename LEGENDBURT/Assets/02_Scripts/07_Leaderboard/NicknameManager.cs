@@ -1,63 +1,54 @@
-using Assets._02_Scripts._01_System.Stage;
-using TMPro;
 using Unity.Services.Authentication;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NicknameManager : MonoSingleton<NicknameManager>
 {
-    public bool IsNickNameChoosing { get; private set; } = false;
-
-    [SerializeField]
-    private TMP_InputField inputField;
-    [SerializeField]
-    private GameObject nickNamePanel;
-    [SerializeField]
-    private EventChannelSO stageChannel;
-
     private const string NicknameKey = "Nickname";
 
-    private void Start()
+    public string Nickname { get; private set; }
+
+    protected override void Awake()
     {
-        if (PlayerPrefs.HasKey(NicknameKey))
-        {
-            nickNamePanel.gameObject.SetActive(false);
-        }
-        else
-        {
-            nickNamePanel.gameObject.SetActive(true);
-            IsNickNameChoosing = true;
-        }
+        base.Awake();
+
+        Nickname = PlayerPrefs.GetString(NicknameKey, string.Empty);
     }
 
-    public async void RegisterNickname()
+    public bool HasNickname()
     {
-        if (PlayerPrefs.HasKey(NicknameKey))
-            return;
+        return !string.IsNullOrEmpty(Nickname);
+    }
 
-        string nickname = inputField.text;
+    public async System.Threading.Tasks.Task<bool> RegisterNicknameAsync(string nickname)
+    {
+        nickname = nickname.Trim();
+
+        if (string.IsNullOrEmpty(nickname))
+            return false;
 
         await AuthenticationService.Instance
             .UpdatePlayerNameAsync(nickname);
 
-        PlayerPrefs.SetString(
-            NicknameKey,
-            nickname);
-
+        PlayerPrefs.SetString(NicknameKey, nickname);
         PlayerPrefs.Save();
 
-        nickNamePanel.gameObject.SetActive(false);
-        IsNickNameChoosing = false;
+        Nickname = nickname;
 
-        stageChannel.RasiseEvent(StageEvents.LoadTutorialEvent);
+        return true;
     }
 
-    [ContextMenu("Delete Nickname Pref")]
-    public void DeleteNicknamePref()
+    public void DeleteNickname()
     {
         PlayerPrefs.DeleteKey(NicknameKey);
         PlayerPrefs.Save();
 
+        Nickname = string.Empty;
+    }
+
+    [ContextMenu("Delete Nickname Pref")]
+    private void DeleteNicknamePrefContextMenu()
+    {
+        DeleteNickname();
         Debug.Log("Nickname Pref Deleted");
     }
 }

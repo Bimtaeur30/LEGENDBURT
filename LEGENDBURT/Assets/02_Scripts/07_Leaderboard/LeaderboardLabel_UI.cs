@@ -2,17 +2,24 @@ using System;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardLabel_UI : MonoBehaviour
 {
+    [SerializeField] private Color normalColor;
+    [SerializeField] private Color highlightColor;
+    [SerializeField] private Image label;
+
     [SerializeField] private TextMeshProUGUI nameLabelTxt;
     [SerializeField] private TextMeshProUGUI timeLabelTxt;
     [SerializeField] private TextMeshProUGUI gradeTxt;
-    public void Initialize(int grade, string userName, float time)
+    public void Initialize(int grade, string userName, float time, bool highlight)
     {
         gradeTxt.text = grade.ToString();
         nameLabelTxt.text = userName.ToString();
         timeLabelTxt.text = ShowRecordTimeTxt(time);
+
+        label.color = highlight ? highlightColor : normalColor;
     }
 
     private string ShowRecordTimeTxt(float timef)

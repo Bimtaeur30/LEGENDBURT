@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutorialData_Move
   m_EditorClassIdentifier: Assembly-CSharp::TutorialData
   <TutorialTitle>k__BackingField: "# \uAE30\uBCF8\uC774\uB3D9"
-  <TutorialDescription>k__BackingField: "[W]/[D]\uB85C \uC55E/\uB4A4 \uC774\uB3D9\uC744
+  <TutorialDescription>k__BackingField: "[W]/[S]\uB85C \uC55E/\uB4A4 \uC774\uB3D9\uC744
     \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4. [A]/[D]\uB85C \uC88C\uC6B0 \uBC29\uD5A5\uC744
     \uC870\uC808\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   <TutorialVideo>k__BackingField: {fileID: 32900000, guid: 9046f82ad183fe9438797ebfb1fee05b, type: 3}

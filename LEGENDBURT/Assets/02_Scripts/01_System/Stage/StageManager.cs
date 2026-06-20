@@ -101,7 +101,8 @@ public class StageManager : MonoSingleton<StageManager>
             Save_parts1 = null;
             Save_parts2 = null;
             Save_artifactSOs.Clear();
-            SceneManager.LoadScene("02_Ending"); // 엔딩씬으로 이동
+            SceneChangeManager.Instance.ChangeScene("02_Ending");
+
         }
         else
         {
@@ -110,7 +111,8 @@ public class StageManager : MonoSingleton<StageManager>
             Save_parts2 = @event.SecondParts;
             Save_artifactSOs = @event.ArtifactLIst;
 
-            SceneManager.LoadScene("01_MainGame");
+            SceneChangeManager.Instance.ChangeScene("01_MainGame");
+
         }
     }
     private void HandleCreateStageSaveDataEvent(CreateStageSaveDataEvent @event)
@@ -123,7 +125,7 @@ public class StageManager : MonoSingleton<StageManager>
         Save_parts1 = null;
         Save_parts2 = null;
         Save_artifactSOs?.Clear();
-        SceneManager.LoadScene("03_Menu");
+        SceneChangeManager.Instance.ChangeScene("03_Menu");
     }
     private void HandleLoadTutorialEvent(LoadTutorialEvent @event)
     {
@@ -131,6 +133,7 @@ public class StageManager : MonoSingleton<StageManager>
         Save_parts1 = null;
         Save_parts2 = null;
         Save_artifactSOs?.Clear();
-        SceneManager.LoadScene("04_Tutorial");
+        SceneChangeManager.Instance.ChangeScene("04_Tutorial");
+
     }
 }

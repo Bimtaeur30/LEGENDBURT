@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] private Nickname_UI nickname;
     [SerializeField] private EventChannelSO stageChannel;
     [SerializeField] private EventChannelSO soundChannel;
     [SerializeField] private SoundClipSO menuBGM;
@@ -15,7 +16,7 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && NicknameManager.Instance.IsNickNameChoosing == false)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && nickname.IsNickNameChoosing == false)
         {
             stageChannel.RasiseEvent(StageEvents.MoveNextStageEvent.Init(null, null, null));
         }

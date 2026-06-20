@@ -92,6 +92,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_COLOR2
         passType: 0
+      - keywords: GRADATION_COLOR2 TRANSITION_PATTERN
+        passType: 0
       - keywords: GRADATION_COLOR2 UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: GRADATION_COLOR4 UNITY_UI_ALPHACLIP

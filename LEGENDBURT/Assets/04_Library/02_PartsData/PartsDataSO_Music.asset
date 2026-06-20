@@ -18,7 +18,7 @@ MonoBehaviour:
   <PartsIcon>k__BackingField: {fileID: 21300000, guid: 265a61dd3a7d5894ab67012c21bb1a62, type: 3}
   <PartPrefab>k__BackingField: {fileID: 7683231801431176997, guid: eaad28b872c6ad346ba226db524129bd, type: 3}
   <CoolTime>k__BackingField: 10
-  <PartsDescription>k__BackingField: "\uD30C\uC6CC 70, \uBAA8\uB4E0 \uC18C\uB9AC\uB294
+  <PartsDescription>k__BackingField: "\uD30C\uC6CC 85, \uBAA8\uB4E0 \uC18C\uB9AC\uB294
     \uC74C\uC545\uC774 \uB420 \uC218 \uC788\uB2E4\uACE0 \uB204\uAD70\uAC00 \uB9D0\uD588\uB2E4."
   BoostParticlePrefab: {fileID: 1426295420218159843, guid: 918346acb2539a74da21f56b9bf57e6b, type: 3}
-  BoostForce: 70
+  BoostForce: 85
