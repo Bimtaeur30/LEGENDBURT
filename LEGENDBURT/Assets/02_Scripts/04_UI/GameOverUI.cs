@@ -140,7 +140,11 @@ public class GameOverUI : MonoBehaviour
         foreach (var entry in list)
         {
             LeaderboardLabel_UI label = Instantiate(leaderboardLabel_UI, leaderboardLabel_Parent);
-            label.Initialize(entry.Rank + 1, entry.PlayerName, (float)entry.Score, true);
+
+            string displayName = entry.PlayerName.Split('#')[0];
+            bool isHighlight = displayName == NicknameManager.Instance.Nickname;
+
+            label.Initialize(entry.Rank + 1, entry.PlayerName, (float)entry.Score, isHighlight);
             Debug.Log(
                 $"{entry.Rank + 1}À§ " +
                 $"{entry.PlayerName} " +

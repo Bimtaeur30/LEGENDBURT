@@ -562,8 +562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3cfd192dd6a33c47977a1c4191c009d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeaderboardLabel_UI
-  normalColor: {r: 1, g: 0.7647059, b: 0.7764706, a: 0}
-  highlightColor: {r: 1, g: 0.3254717, b: 0.35919824, a: 0}
+  normalColor: {r: 1, g: 0.7647059, b: 0.7764706, a: 1}
+  highlightColor: {r: 1, g: 0.3254717, b: 0.35919824, a: 1}
   label: {fileID: 7126410249133831635}
   nameLabelTxt: {fileID: 4640316402751129865}
   timeLabelTxt: {fileID: 6925487624507402049}
