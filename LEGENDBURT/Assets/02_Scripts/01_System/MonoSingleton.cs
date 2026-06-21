@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance = null;
+    private static T _instance;
 
     public static T Instance
     {
@@ -11,13 +11,14 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             if (_instance == null)
             {
                 _instance = FindAnyObjectByType<T>();
+
                 if (_instance == null)
                 {
-                    GameObject obj = new GameObject();
-                    obj.name = typeof(T).Name;
+                    GameObject obj = new GameObject(typeof(T).Name);
                     _instance = obj.AddComponent<T>();
                 }
             }
+
             return _instance;
         }
     }
@@ -26,17 +27,25 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (_instance == null)
+        if (_instance != null && _instance != this)
         {
-            _instance = this as T;
-            if (isDonDestroy)
-            {
-                DontDestroyOnLoad(this.gameObject);
-            }
+            Destroy(gameObject);
+            return;
         }
-        else
+
+        _instance = this as T;
+
+        if (isDonDestroy)
         {
-            Destroy(this.gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
         }
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   <StageName>k__BackingField: "\uD29C\uD1A0\uB9AC\uC5BC \uC11C\uD0B7"
   <LimitedTime>k__BackingField: 30
   <StagePrefab>k__BackingField: {fileID: 8891418181273975836, guid: 141fddf61918ce543ac753146042667c, type: 3}
-  <TimeLineAsset>k__BackingField: {fileID: 11400000, guid: e59835de55c3ac64caa578a97cd24862, type: 2}
+  <TimeLineAsset>k__BackingField: {fileID: 11400000, guid: 8abdaa7d66ae4b448bb1f66b67da0629, type: 2}

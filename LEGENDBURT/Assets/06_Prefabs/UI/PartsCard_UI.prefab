@@ -602,8 +602,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UVScroller
   img: {fileID: 4261845998374428617}
-  x: 0
-  y: 0
+  x: 0.1
+  y: 0.1
 --- !u!1 &2120077091565288330
 GameObject:
   m_ObjectHideFlags: 0
