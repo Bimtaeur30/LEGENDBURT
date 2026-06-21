@@ -12058,9 +12058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9107bc0d558b814d866c9890ed87be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UVScroller
-  img: {fileID: 0}
+  img: {fileID: 559012459}
   x: 0
-  y: 0
+  y: 0.1
 --- !u!114 &559012459
 MonoBehaviour:
   m_ObjectHideFlags: 0

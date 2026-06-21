@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Effect_FartChangeOnFailFart
   m_EditorClassIdentifier: Assembly-CSharp::FartChangeOnFartFailEvent
   trigger: 3
-  rate: 10
+  rate: 20
   playerChannel: {fileID: 11400000, guid: 6f7c4c26cf3a37f409eaa5d3864f5829, type: 2}

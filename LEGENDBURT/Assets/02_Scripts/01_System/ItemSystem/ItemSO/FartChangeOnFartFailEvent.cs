@@ -8,7 +8,7 @@ public class FartChangeOnFartFailEvent : ArtifactEffectBase
 
     public override void Apply(ArtifactContext ctx)
     {
-        if (Random.Range(0, 100) >= rate)
+        if (Random.Range(0, 100) <= rate)
         {
             Debug.Log("È®·üÀ» ¶Õ°í ¹æ±Í½ÇÆĞ Âù½º ¹ßµ¿");
             playerChannel.RasiseEvent(PlayerEvents.ActiveBurtEvent);
