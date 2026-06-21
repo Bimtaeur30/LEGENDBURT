@@ -11,6 +11,11 @@ public class PartsEquip_UI : MonoBehaviour
     // ParsCardSelector_UI에서 이쪽으로 ActivateEquipParts 해줘야함.
     [Header("Events")]
     [SerializeField] private EventChannelSO playerChannel;
+    [SerializeField] private EventChannelSO soundChannel;
+
+    [Header("Sound")]
+    [SerializeField] private SoundClipSO attatchClip;
+
     [Header("UI")]
     [SerializeField] private CanvasGroup[] hideGroups;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -38,6 +43,7 @@ public class PartsEquip_UI : MonoBehaviour
         DeactivateEquipParts();
         playerChannel.RasiseEvent(PlayerEvents.AttachPartsEvent.Init(myData, pos));
         playerChannel.RasiseEvent(PlayerEvents.OnGameReadyEvent);
+        soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(attatchClip));
     }
 
     public void ActivateEquipParts(PartsDataSO data)
@@ -46,8 +52,8 @@ public class PartsEquip_UI : MonoBehaviour
         onEquipEvent = true;
         partsIcon.sprite = data.PartsIcon;
 
-        sequence.Join(canvasGroup.DOFade(1f, 1f));
-        sequence.Join(equipBtnGroup.DOFade(1f, 1f));
+        sequence.Join(canvasGroup.DOFade(1f, 0.5f));
+        sequence.Join(equipBtnGroup.DOFade(1f, 0.5f));
         equipBtnGroup.interactable = true;
 
         foreach (CanvasGroup c in hideGroups)

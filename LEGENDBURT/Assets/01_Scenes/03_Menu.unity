@@ -12058,9 +12058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9107bc0d558b814d866c9890ed87be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UVScroller
-  _img: {fileID: 559012459}
-  _x: 0
-  _y: 0.05
+  img: {fileID: 0}
+  x: 0
+  y: 0
 --- !u!114 &559012459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12265,7 +12265,7 @@ GameObject:
   - component: {fileID: 608349820}
   - component: {fileID: 608349819}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: ///SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12283,6 +12283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c130032b6aff7c4a8d1427e8f1370fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  isDonDestroy: 1
+  mixer: {fileID: 24100000, guid: 43ea9b9b9ca2bc04c8d31ccfcdfe09b0, type: 2}
+  SFX: {fileID: 8823198901163849316, guid: 43ea9b9b9ca2bc04c8d31ccfcdfe09b0, type: 2}
+  BGM: {fileID: -5982457066149684974, guid: 43ea9b9b9ca2bc04c8d31ccfcdfe09b0, type: 2}
   poolManager: {fileID: 11400000, guid: f55bb46fa8a930142bac1657ed7d1206, type: 2}
   soundItem: {fileID: 11400000, guid: 4d353052e027a144e98285b6b17a79d6, type: 2}
   <SoundChannel>k__BackingField: {fileID: 11400000, guid: 818b72b77f16ff547a87f701113c0df8, type: 2}
@@ -12457,7 +12461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -288}
+  m_AnchoredPosition: {x: 0, y: -328}
   m_SizeDelta: {x: 200, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &710783544
@@ -12478,7 +12482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &710783545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12856,6 +12860,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da410caa65f70e9428a08e9ae391d474, type: 2}
   - {fileID: 11400000, guid: bfb02517e52149d40a0f10a08de38917, type: 2}
   - {fileID: 11400000, guid: f82404565bd6f2644a3ccfb0f931c0c2, type: 2}
+  - {fileID: 11400000, guid: eeb36da8f99876c4299bf85c325ad4c8, type: 2}
   <Tuto_stageData>k__BackingField: {fileID: 11400000, guid: e0804b26509ef4f4dac6b5f2cd91d603, type: 2}
   playerChannel: {fileID: 11400000, guid: 6f7c4c26cf3a37f409eaa5d3864f5829, type: 2}
   stageChannel: {fileID: 11400000, guid: df78d72ea6b4e9a4ba6f9be80c3cbd4b, type: 2}
@@ -13052,7 +13057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &850907904
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13307,6 +13312,7 @@ MonoBehaviour:
   stageChannel: {fileID: 11400000, guid: df78d72ea6b4e9a4ba6f9be80c3cbd4b, type: 2}
   soundChannel: {fileID: 11400000, guid: 818b72b77f16ff547a87f701113c0df8, type: 2}
   menuBGM: {fileID: 11400000, guid: ccb3db3428b0f454a91db0c3012960ac, type: 2}
+  fartClip: {fileID: 11400000, guid: 359ede9eda3ba844383f7c3e8eac1e2b, type: 2}
 --- !u!4 &851204808
 Transform:
   m_ObjectHideFlags: 0
@@ -13974,7 +13980,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 100
@@ -16195,7 +16201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1735846979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16237,22 +16243,22 @@ MonoBehaviour:
   m_SamplingIntensity: 0.5
   m_SamplingWidth: 1
   m_SamplingScale: 1
-  m_TransitionFilter: 0
+  m_TransitionFilter: 8
   m_TransitionRate: 0.5
   m_TransitionReverse: 0
-  m_TransitionTex: {fileID: 2800000, guid: 6548e3d428745774eb25bdf190fe7bd7, type: 3}
+  m_TransitionTex: {fileID: 2800000, guid: 8eec14966e0e5954b8a7eb02a37bbc10, type: 3}
   m_TransitionTexScale: {x: 1, y: 1}
   m_TransitionTexOffset: {x: 0, y: 0}
-  m_TransitionTexSpeed: {x: 0, y: 0}
+  m_TransitionTexSpeed: {x: 1, y: 0}
   m_TransitionRotation: 0
-  m_TransitionKeepAspectRatio: 0
-  m_TransitionWidth: 0.857
+  m_TransitionKeepAspectRatio: 1
+  m_TransitionWidth: 0.8
   m_TransitionSoftness: 0.2
   m_TransitionRange:
     m_Min: 0
     m_Max: 1
-  m_TransitionColorFilter: 6
-  m_TransitionColor: {r: 0, g: 0.5, b: 1, a: 1}
+  m_TransitionColorFilter: 4
+  m_TransitionColor: {r: 0, g: 0, b: 0, a: 1}
   m_TransitionColorGlow: 0
   m_TransitionPatternReverse: 0
   m_TransitionAutoPlaySpeed: 0
@@ -16305,14 +16311,14 @@ MonoBehaviour:
   m_GradationMode: 4
   m_GradationIntensity: 1
   m_GradationColorFilter: 1
-  m_GradationColor1: {r: 1, g: 1, b: 1, a: 1}
+  m_GradationColor1: {r: 1, g: 1, b: 1, a: 0}
   m_GradationColor2: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor3: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor4: {r: 1, g: 1, b: 1, a: 1}
   m_GradationGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 0}
+    key1: {r: 1, g: 1, b: 1, a: 0.27450982}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -16328,19 +16334,19 @@ MonoBehaviour:
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
+    atime1: 7969
+    atime2: 65535
+    atime3: 65535
+    atime4: 65535
+    atime5: 65535
     atime6: 0
     atime7: 0
     m_Mode: 0
     m_ColorSpace: 0
     m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  m_GradationOffset: 0
-  m_GradationScale: 1
+    m_NumAlphaKeys: 3
+  m_GradationOffset: 1
+  m_GradationScale: 0.56234133
   m_GradationRotation: 0
   m_GradationWrapMode: 0
   m_GradationReverse: 0
@@ -16379,7 +16385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.5873331, b: 0.5613208, a: 0.16470589}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -53551,8 +53557,8 @@ SceneRoots:
   - {fileID: 794607574}
   - {fileID: 39937296}
   - {fileID: 314018696}
-  - {fileID: 851204808}
   - {fileID: 608349820}
+  - {fileID: 851204808}
   - {fileID: 956031962}
   - {fileID: 148126198}
   - {fileID: 15443555}

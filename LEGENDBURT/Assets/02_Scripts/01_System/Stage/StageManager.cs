@@ -70,6 +70,7 @@ public class StageManager : MonoSingleton<StageManager>
     {
         CurrentStageData = StageData[CurrentStageIndex];
         Stage stage = Instantiate(CurrentStageData.StagePrefab, Vector3.zero, Quaternion.identity);
+        stageChannel.RasiseEvent(StageEvents.SetTimelineEvent.Init(CurrentStageData.TimeLineAsset));
         stage.Initialize();
     }
 

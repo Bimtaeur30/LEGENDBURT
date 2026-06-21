@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.Services.Authentication;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
@@ -141,8 +142,7 @@ public class GameOverUI : MonoBehaviour
         {
             LeaderboardLabel_UI label = Instantiate(leaderboardLabel_UI, leaderboardLabel_Parent);
 
-            string displayName = entry.PlayerName.Split('#')[0];
-            bool isHighlight = displayName == NicknameManager.Instance.Nickname;
+            bool isHighlight = entry.PlayerId == AuthenticationService.Instance.PlayerId;
 
             label.Initialize(entry.Rank + 1, entry.PlayerName, (float)entry.Score, isHighlight);
             Debug.Log(

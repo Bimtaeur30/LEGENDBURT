@@ -52,19 +52,31 @@ public class PartsModule : MonoBehaviour, IModule, IAfterInitModule
         {
             if (CurrentFirstParts.Activate())
             {
+                CurrentFirstParts.OnPartsDeactivate += HandleOnPartsDeactivate;
                 player.ChatModule.GenerateChat(CurrentFirstParts.PartsDataSO.PartsName + " 발동!");
                 soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(LesGoClip, transform, 0));
+
+                //player.Renderer.SetBool("BOING", true);
             }
         }
         else if (@event.JointPos == PartsJointPos.SecondSlot && CurrentSecondParts != null)
         {
             if (CurrentSecondParts.Activate())
             {
+                CurrentSecondParts.OnPartsDeactivate += HandleOnPartsDeactivate;
                 player.ChatModule.GenerateChat(CurrentSecondParts.PartsDataSO.PartsName + " 발동!");
                 soundChannel.RasiseEvent(SoundEvents.PlaySoundEvent.Init(LesGoClip, transform, 0));
+
+                //player.Renderer.SetBool("BOING", true);
             }
         }
     }
+
+    private void HandleOnPartsDeactivate()
+    {
+        //player.Renderer.SetBool("BOING", false);
+    }
+
     private void HandleRemovePartsEvent(RemovePartsEvent @event)
     {
         Transform joint = GetJointTransform(@event.JointPos);

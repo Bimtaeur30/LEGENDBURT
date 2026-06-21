@@ -20,13 +20,13 @@ public class ItemCard_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        rect.DOSizeDelta(new Vector2(220, 220), 0.2f).SetUpdate(true);
+        rect.DOSizeDelta(new Vector2(140, 140), 0.2f).SetUpdate(true);
         ToolTipManager.Instance.UseToolTip(m_data.ArtifactName, m_data.Description);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        rect.DOSizeDelta(new Vector2(200, 200), 0.2f).SetUpdate(true);
+        rect.DOSizeDelta(new Vector2(130, 130), 0.2f).SetUpdate(true);
         ToolTipManager.Instance.StopUseToolTip();
     }
 

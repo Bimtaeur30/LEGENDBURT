@@ -601,9 +601,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9107bc0d558b814d866c9890ed87be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UVScroller
-  _img: {fileID: 4261845998374428617}
-  _x: -0.05
-  _y: -0.05
+  img: {fileID: 4261845998374428617}
+  x: 0
+  y: 0
 --- !u!1 &2120077091565288330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1292,8 @@ GameObject:
   - component: {fileID: 9175304520495813810}
   - component: {fileID: 2691674274149212949}
   - component: {fileID: 58590958824433588}
+  - component: {fileID: 1760995459020055660}
+  - component: {fileID: 8839353808400299833}
   m_Layer: 5
   m_Name: PartsCard_UI
   m_TagString: Untagged
@@ -1607,6 +1609,34 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1760995459020055660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977613198789650787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274963641f277bc43884ba9e5717c1f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITiltEffect_UI
+  maxTiltAngle: 15
+  rotationSpeed: 15
+--- !u!114 &8839353808400299833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977613198789650787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f463119f95d784abf10b281221b126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonClickSound_UI
+  soundChannel: {fileID: 11400000, guid: 818b72b77f16ff547a87f701113c0df8, type: 2}
+  clip: {fileID: 11400000, guid: b07fd2aec64196d49888e33c48de38ee, type: 2}
 --- !u!1 &7135775721207049424
 GameObject:
   m_ObjectHideFlags: 0

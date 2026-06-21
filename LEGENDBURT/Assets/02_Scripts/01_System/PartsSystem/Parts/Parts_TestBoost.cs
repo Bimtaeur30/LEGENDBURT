@@ -49,6 +49,7 @@ public class Parts_TestBoost : PartBase
 
     public override void Deactivate()
     {
+        base.Deactivate();
         particle.Stop();
     }
 

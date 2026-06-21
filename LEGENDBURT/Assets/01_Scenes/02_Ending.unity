@@ -14546,7 +14546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -83}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626576612
@@ -14569,7 +14569,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBFE1\uBFE1\uCE74\uB97C \uCCB4\uD5D8\uD574\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4"
+  m_text: "\uBFE1\uBFE1\uCE74\uB294 \uBAA8\uB4E0 \uC11C\uD0B7\uC744 \uC644\uC8FC\uD558\uACE0
+    \uD654\uC7A5\uC2E4\uC5D0 \uBB34\uC0AC\uD788 \uB3C4\uCC29\uD588\uC2B5\uB2C8\uB2E4!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d5dcfbbccdace124d9eaa3464c04b08e, type: 2}
   m_sharedMaterial: {fileID: -6468650810779384158, guid: d5dcfbbccdace124d9eaa3464c04b08e, type: 2}
@@ -14578,8 +14579,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1845493759
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0.42745098}
+    rgba: 2717908991
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.6313726}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14596,8 +14597,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -25368,10 +25369,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB370\uBAA8\uBC84\uC804 \uC2A4\uD14C\uC774\uC9C0 \uB05D"
+  m_text: "\uBAA8\uB4E0\uC11C\uD0B7 \uC644\uC8FC"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d5dcfbbccdace124d9eaa3464c04b08e, type: 2}
-  m_sharedMaterial: {fileID: -6468650810779384158, guid: d5dcfbbccdace124d9eaa3464c04b08e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 280870141bf84a84c8abf43bbfbd04ad, type: 2}
+  m_sharedMaterial: {fileID: 2591850833852555692, guid: 280870141bf84a84c8abf43bbfbd04ad, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -45326,6 +45327,51 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01911584, y: 0.0039209803, z: 0.011917852}
   m_Center: {x: 0.000009770505, y: 0.000008340459, z: -0.000008265255}
+--- !u!1 &1838046745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1838046747}
+  - component: {fileID: 1838046746}
+  m_Layer: 0
+  m_Name: EndingManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1838046746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838046745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4329f6443309575438ae0d4a050980d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndingManager
+  stageChannel: {fileID: 11400000, guid: df78d72ea6b4e9a4ba6f9be80c3cbd4b, type: 2}
+--- !u!4 &1838046747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838046745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 551.0574, y: 329.54938, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1848773383
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49239,7 +49285,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2063271130}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1838046746}
+        m_TargetAssemblyTypeName: EndingManager, Assembly-CSharp
+        m_MethodName: QuitBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2063271130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49290,7 +49348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eed501b3b3a9f54cab8a1134632ec31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIButtonHoverRotate_UI
-  hoverAngle: -10
+  hoverAngle: 5
   duration: 0.2
   ease: 27
 --- !u!1001 &2067668259
@@ -50710,3 +50768,4 @@ SceneRoots:
   - {fileID: 925556233}
   - {fileID: 1436703538}
   - {fileID: 1472395718}
+  - {fileID: 1838046747}

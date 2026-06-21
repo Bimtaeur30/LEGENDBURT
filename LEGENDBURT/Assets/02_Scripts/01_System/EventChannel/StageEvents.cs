@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.Timeline;
 
 namespace Assets._02_Scripts._01_System.Stage
 {
@@ -14,6 +15,7 @@ namespace Assets._02_Scripts._01_System.Stage
         public static RemoveStageSaveDataEvent RemoveStageSaveDataEvent = new RemoveStageSaveDataEvent();
 
         public static GetEquipedPartsDataEvent GetEquipedPartsDataEvent = new GetEquipedPartsDataEvent();
+        public static SetTimelineEvent SetTimelineEvent = new SetTimelineEvent();
     }
 
     public class MoveNextStageEvent : GameEvent // 스테이지 이동
@@ -34,6 +36,15 @@ namespace Assets._02_Scripts._01_System.Stage
     public class LoadTutorialEvent : GameEvent { } // 튜토리얼 시작
     public class CreateStageSaveDataEvent : GameEvent { } // 스테이지 시작
     public class RemoveStageSaveDataEvent : GameEvent { } // 게임 오버
+    public class SetTimelineEvent : GameEvent
+    {
+        public TimelineAsset timeline;
+        public SetTimelineEvent Init(TimelineAsset asset)
+        {
+            timeline = asset;
+            return this;
+        }
+    }
     public class GetEquipedPartsDataEvent : GameEvent //  파츠 받기
     {
         public Action<(PartsDataSO, PartsDataSO)> ReciveAction;

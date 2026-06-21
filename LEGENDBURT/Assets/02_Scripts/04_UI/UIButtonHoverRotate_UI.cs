@@ -11,8 +11,13 @@ public class UIButtonHoverRotate_UI : MonoBehaviour, IPointerEnterHandler, IPoin
     [SerializeField] private float duration = 0.2f;
     [SerializeField] private Ease ease = Ease.OutBack;
 
+    [Header("Cooldown")]
+    [SerializeField] private float cooldown = 0.05f;
+
     private RectTransform rectTransform;
     private Quaternion defaultRotation;
+
+    private float lastEventTime;
 
     private void Awake()
     {
@@ -22,6 +27,11 @@ public class UIButtonHoverRotate_UI : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (Time.unscaledTime - lastEventTime < cooldown)
+            return;
+
+        lastEventTime = Time.unscaledTime;
+
         rectTransform.DOKill();
 
         rectTransform.DOLocalRotate(
@@ -32,6 +42,11 @@ public class UIButtonHoverRotate_UI : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (Time.unscaledTime - lastEventTime < cooldown)
+            return;
+
+        lastEventTime = Time.unscaledTime;
+
         rectTransform.DOKill();
 
         rectTransform.DOLocalRotate(

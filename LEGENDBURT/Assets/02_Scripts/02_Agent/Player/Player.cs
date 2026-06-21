@@ -17,6 +17,7 @@ public class Player : ModuleOwner
 
     public MovementModule MovementModule { get; private set; }
     public ChatModule ChatModule { get; private set; }
+    public PlayerRenderer Renderer { get; private set; }
 
     public Rigidbody Rigid { get; private set; }
     public bool IsDrifting { get; private set; }
@@ -38,6 +39,7 @@ public class Player : ModuleOwner
         Rigid = GetComponent<Rigidbody>();
         MovementModule = GetModule<MovementModule>();
         ChatModule = GetModule<ChatModule>();
+        Renderer = GetModule<PlayerRenderer>();
 
         PlayerChannel.AddListener<SetActivePlayerMovementInputEvent>(HandleSetActivePlayerMovementInputEvent);
         PlayerChannel.AddListener<OnGameOverEvent>(HandleOnGameOverEvent);
@@ -70,12 +72,12 @@ public class Player : ModuleOwner
     }
     private void Update()
     {
-        if (Keyboard.current.f1Key.wasPressedThisFrame)
-            PlayerChannel.RasiseEvent(PlayerEvents.OnItemSelectEvent);
-        if (Keyboard.current.f2Key.wasPressedThisFrame)
-            PlayerChannel.RasiseEvent(PlayerEvents.EquipItemEvent.Init(TestArtifactSO)); // Å×½ºÆ® À¯¹° È¹µæ
-        if (Keyboard.current.f3Key.wasPressedThisFrame)
-            PlayerChannel.RasiseEvent(PlayerEvents.EquipItemEvent.Init(TestArtifactSO_2)); // Å×½ºÆ® À¯¹° È¹µæ
+        //if (Keyboard.current.f1Key.wasPressedThisFrame)
+        //    PlayerChannel.RasiseEvent(PlayerEvents.OnItemSelectEvent);
+        //if (Keyboard.current.f2Key.wasPressedThisFrame)
+        //    PlayerChannel.RasiseEvent(PlayerEvents.EquipItemEvent.Init(TestArtifactSO)); // Å×½ºÆ® À¯¹° È¹µæ
+        //if (Keyboard.current.f3Key.wasPressedThisFrame)
+        //    PlayerChannel.RasiseEvent(PlayerEvents.EquipItemEvent.Init(TestArtifactSO_2)); // Å×½ºÆ® À¯¹° È¹µæ
     }
     private void HandleBoostPressed()
     {

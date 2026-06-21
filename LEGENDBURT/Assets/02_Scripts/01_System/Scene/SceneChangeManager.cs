@@ -20,7 +20,7 @@ public class SceneChangeManager : MonoSingleton<SceneChangeManager>
 
     private void Update()
     {
-        loadingIcon.transform.Rotate(new Vector3(0, 0, 1) * Time.deltaTime * 50f);
+        loadingIcon.transform.Rotate(new Vector3(0, 0, 1) * Time.deltaTime * 100f);
     }
 
     private void OnEnable()

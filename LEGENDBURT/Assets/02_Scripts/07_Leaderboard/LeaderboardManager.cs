@@ -12,7 +12,8 @@ public class LeaderboardManager : MonoSingleton<LeaderboardManager>
     {
         { StageType.Stage1, "Stage_1_Leaderboard" },
         { StageType.Stage2, "Stage_2_Leaderboard" },
-        { StageType.Stage3, "Stage_3_Leaderboard" }
+        { StageType.Stage3, "Stage_3_Leaderboard" },
+        { StageType.Stage4, "Stage_4_Leaderboard" }
     };
 
     public async Task<List<LeaderboardEntry>> GetTop20(StageType stage)

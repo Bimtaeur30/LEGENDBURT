@@ -56,6 +56,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_BLUR_FAST
         passType: 0
+      - keywords: COLOR_FILTER UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: DETAIL_ADDITIVE EDGE_SHINY GRADATION_COLOR2 TARGET_HUE UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: DETAIL_ADDITIVE EDGE_SHINY GRADATION_COLOR2 TARGET_LUMINANCE UNITY_UI_ALPHACLIP
@@ -99,6 +101,10 @@ ShaderVariantCollection:
       - keywords: GRADATION_COLOR4 UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: GRADATION_GRADIENT
+        passType: 0
+      - keywords: GRADATION_GRADIENT TRANSITION_BLAZE
+        passType: 0
+      - keywords: GRADATION_GRADIENT TRANSITION_MELT
         passType: 0
       - keywords: GRADATION_GRADIENT TRANSITION_PATTERN
         passType: 0

@@ -15,6 +15,7 @@ public class ESCUI : MonoBehaviour
     [Header("UI")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private RectTransform panelRect;
+    [SerializeField] private SettingsUI settingUI;
 
     [Header("Animation")]
     [SerializeField] private float fadeDuration = 0.3f;
@@ -23,6 +24,7 @@ public class ESCUI : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button backButton;
+    [SerializeField] private Button settingButton;
     [SerializeField] private Button menuButton;
     [SerializeField] private Button quitButton;
 
@@ -50,6 +52,7 @@ public class ESCUI : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
 
         backButton.onClick.AddListener(CloseESC);
+        settingButton.onClick.AddListener(OpenSetting);
         menuButton.onClick.AddListener(GoToMenu);
         quitButton.onClick.AddListener(QuitGame);
     }
@@ -88,6 +91,11 @@ public class ESCUI : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    private void OpenSetting()
+    {
+        settingUI.Open();
+    }
+
     private void CloseESC()
     {
         isOpen = false;
@@ -115,6 +123,7 @@ public class ESCUI : MonoBehaviour
 
     private void GoToMenu()
     {
+        Time.timeScale = 1f;
         stageChannel.RasiseEvent(StageEvents.RemoveStageSaveDataEvent);
     }
 

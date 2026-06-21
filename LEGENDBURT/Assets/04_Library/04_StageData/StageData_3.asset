@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1925f5b9ffaf843409bbe891b771207e, type: 3}
   m_Name: StageData_3
   m_EditorClassIdentifier: Assembly-CSharp::StageDataSO
-  StageName: "#3 \uB77C\uC2A4\uD2B8 \uADF8\uB791\uD504\uB9AC"
-  LimitedTime: 25
-  StagePrefab: {fileID: 8891418181273975836, guid: 636779089b02ff54cbc71230108a05b0, type: 3}
+  <StageName>k__BackingField: "#3 \uD558\uB4DC \uC11C\uD0B7"
+  <LimitedTime>k__BackingField: 23
+  <StagePrefab>k__BackingField: {fileID: 8891418181273975836, guid: 636779089b02ff54cbc71230108a05b0, type: 3}
+  <TimeLineAsset>k__BackingField: {fileID: 11400000, guid: e59835de55c3ac64caa578a97cd24862, type: 2}

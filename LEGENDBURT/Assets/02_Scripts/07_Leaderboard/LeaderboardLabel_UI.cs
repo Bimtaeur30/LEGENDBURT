@@ -6,9 +6,7 @@ using UnityEngine.UI;
 
 public class LeaderboardLabel_UI : MonoBehaviour
 {
-    [SerializeField] private Color normalColor;
-    [SerializeField] private Color highlightColor;
-    [SerializeField] private Image label;
+    [SerializeField] private GameObject highlightObj;
 
     [SerializeField] private TextMeshProUGUI nameLabelTxt;
     [SerializeField] private TextMeshProUGUI timeLabelTxt;
@@ -19,7 +17,7 @@ public class LeaderboardLabel_UI : MonoBehaviour
         nameLabelTxt.text = userName.ToString();
         timeLabelTxt.text = ShowRecordTimeTxt(time);
 
-        label.color = highlight ? highlightColor : normalColor;
+        highlightObj.SetActive(highlight);
     }
 
     private string ShowRecordTimeTxt(float timef)

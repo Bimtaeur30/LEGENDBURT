@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Timeline;
 
 [CreateAssetMenu(fileName = "StageDataSO", menuName = "Stage/StageDataSO")]
 public class StageDataSO : ScriptableObject
 {
-    public string StageName = "公力";
-    public int LimitedTime = 30;
-    public Stage StagePrefab;
+    [field:SerializeField] public string StageName { get; private set; } = "公力";
+    [field: SerializeField] public int LimitedTime { get; private set; } = 30;
+    [field: SerializeField] public Stage StagePrefab { get; private set; }
+    [field: SerializeField] public TimelineAsset TimeLineAsset { get; private set; }
 }
